@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Linux-shell | DIVING FOR FUN]]></title>
+  <link href="http://dinny.github.io/blog/categories/linux-shell/atom.xml" rel="self"/>
+  <link href="http://dinny.github.io/"/>
+  <updated>2014-04-27T16:25:24+08:00</updated>
+  <id>http://dinny.github.io/</id>
+  <author>
+    <name><![CDATA[Dinny Wu]]></name>
+    <email><![CDATA[backtickcode@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Notify Your Commandline - Growl and Libnotify]]></title>
+    <link href="http://dinny.github.io/blog/2013/04/06/notify-your-commandline-growl-libnotify/"/>
+    <updated>2013-04-06T21:00:00+08:00</updated>
+    <id>http://dinny.github.io/blog/2013/04/06/notify-your-commandline-growl-libnotify</id>
+    <content type="html"><![CDATA[<p>When using shell, it&rsquo;s a pain to monitor a script with a long execution time. I have to switch between the terminal and other applications, back and forth. If there&rsquo;s a way to send out notifications(here I mean, a valid way that could catch my attention) when some scripts are completed, I can save a piece of time and do a short reading.</p>
+
+<p>On Mac OS X, we have the <strong>Growl</strong> notification service. In the commanline, you can use Growl&rsquo;s commandline tool, <code>growlnotify</code> to send notification to the daemon. For various scripting languages, it has <a href="http://growl.info/documentation/developer/bindings.php">supporting libraries</a>, like <strong><a href="https://github.com/snaka/ruby_gntp">ruby_gntp</a></strong>.</p>
+
+<p>On Linux system, we have <strong><a href="https://developer.gnome.org/libnotify/">libnotify</a></strong>. In the commandline, you can use <code>notify-send</code> command to send notifications to the daemon. On most Linux distributions, this command is packaged in <em>libnotify-bin</em> package.</p>
+
+<h2>Using Growl (Mac OS X)</h2>
+
+<p>Using Growl is very easy. Purchase/install Growl(including commandline tools) and launch it. Then you can send a notification as below:</p>
+
+<p>``` bash
+growlnotify &mdash;appIcon &ldquo;time machine&rdquo; \</p>
+
+<pre><code>        --title "Data Backup"  \
+        --message "Your data backup process has been completed."
+</code></pre>
+
+<p>```
+It will look like this.</p>
+
+<p><img src="https://www.evernote.com/shard/s116/sh/7a6e977b-7620-4b92-b6cc-eaa6d00cf764/120cdf1bc1f3c8306345be45bc4b37c9/res/f9645c72-abc0-4c03-a65f-67517272b1e5/skitch.png?resizeSmall&amp;width=832" alt="image" /></p>
+
+<p>In this example, we use some options:</p>
+
+<ul>
+<li>&mdash;appIcon specifies an app icon to use for the notification.</li>
+<li>&mdash;title specifies the title for the notification.</li>
+<li>&mdash;message specifies the text to be the content of the notification.</li>
+</ul>
+
+
+<p><code>growlnotify</code> supports some other options. You can use <code>growlnotify --help</code> to get the full list. The <code>-w</code> / <code>--wait</code> option is useful if you don&rsquo;t want Growl to close the notification automatically.</p>
+
+<h2>Using Libnotify (Linux)</h2>
+
+<p>On Linux, we can use <strong>libnotify</strong>. If you haven&rsquo;t installed it yet, install it first:</p>
+
+<p>``` bash</p>
+
+<h1>debian/ubuntu</h1>
+
+<p>sudo apt-get install libnotify-bin</p>
+
+<p>```</p>
+
+<p>Then you can give <code>notify-send</code> a try:</p>
+
+<p>``` bash
+notify-send -t 10000 -i baterry-full \</p>
+
+<pre><code>        "Battery Charge Done" \
+        "\nYour battery charging process is done."
+</code></pre>
+
+<p>```</p>
+
+<p>In this example, the options are:</p>
+
+<ul>
+<li>-t specifies the expire time(in <em>milliseconds</em>).</li>
+<li>-i specifies the icon to show.</li>
+</ul>
+
+
+<p>It has some other options. You can check with <code>man notify-send</code>.</p>
+
+<blockquote><p>Note: In this example, I just use <strong>-i battery-full</strong> to specify the icon, not its full path. It can auto-expand the path(<em>/usr/share/icons/gnome/32x32/status/battery-full.png</em>). If you want to specify your own icon file, you should use the full path of your image file. On most Linux distributions, the icon files are stored in <strong>/usr/share/icons/</strong>.</p></blockquote>
+
+<h2>When to Use, When Not</h2>
+
+<p>I <strong>STRONGLY</strong> suggest you add the notification function into your shell library, esp. if you are working on some time-consuming scripts in a graphical desktop environment. I found it very useful when I was working on building Android project(typically 20-30 mins). And later, when I was creating a customized Debian live system, it helped me a lot as well.</p>
+
+<p>But keep in mind, DON&rsquo;T use it in a loop. Using it in a loop is just like shooting your own head. You will get a lot of output on your screen and it will make you angry.</p>
+
+<p>And it can&rsquo;t replace logging if your scripts are running in the background, esp. if they are run as cron jobs. In that case, use logging, <strong>output redirection</strong> and <strong>tee</strong>.</p>
+]]></content>
+  </entry>
+  
+</feed>

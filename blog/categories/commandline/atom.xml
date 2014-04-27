@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Commandline | DIVING FOR FUN]]></title>
+  <link href="http://dinny.github.io/blog/categories/commandline/atom.xml" rel="self"/>
+  <link href="http://dinny.github.io/"/>
+  <updated>2014-04-27T16:25:24+08:00</updated>
+  <id>http://dinny.github.io/</id>
+  <author>
+    <name><![CDATA[Dinny Wu]]></name>
+    <email><![CDATA[backtickcode@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[修复通过homebrew安装工具时出现的SHA1 Mismatch问题]]></title>
+    <link href="http://dinny.github.io/blog/2012/08/15/fix-sha1-mismatch-of-homebrew/"/>
+    <updated>2012-08-15T21:00:00+08:00</updated>
+    <id>http://dinny.github.io/blog/2012/08/15/fix-sha1-mismatch-of-homebrew</id>
+    <content type="html"><![CDATA[<p>要给社区的某个工具做个Mac build，而这个工具依赖pyqt，想通过<a href="http://mxcl.github.com/homebrew/">homebrew</a>来安装。运行了一下<code>brew install pyqt</code>，结果输出“SHA1 mismatch”，报错：</p>
+
+<p>``` bash
+dinny-macbook-air:linkchecker dinny$ brew install pyqt
+==> Installing pyqt dependency: qt
+==> Downloading <a href="https://downloads.sf.net/project/machomebrew/Bottles/qt-4.8.0-bottle.tar.gz">https://downloads.sf.net/project/machomebrew/Bottles/qt-4.8.0-bottle.tar.gz</a>
+File already downloaded in /Users/dinny/Library/Caches/Homebrew
+Error: SHA1 mismatch
+Expected: d03b56811d2cac933b6103bd4c8ac636dea3b877
+Got: 2bfe00c5112b0d2a680cd01144701f8937846096
+Archive: /Users/dinny/Library/Caches/Homebrew/qt-4.8.0.bottle.tar.gz
+(To retry an incomplete download, remove the file above.)
+dinny-macbook-air:linkchecker dinny$ rm /Users/dinny/Library/Caches/Homebrew/qt-4.8.0.bottle.tar.gz
+dinny-macbook-air:linkchecker dinny$ brew install pyqt
+==> Installing pyqt dependency: qt
+==> Downloading <a href="https://downloads.sf.net/project/machomebrew/Bottles/qt-4.8.0-bottle.tar.gz">https://downloads.sf.net/project/machomebrew/Bottles/qt-4.8.0-bottle.tar.gz</a></p>
+
+<h6>################################################################## 100.0%</h6>
+
+<p>Error: SHA1 mismatch
+Expected: d03b56811d2cac933b6103bd4c8ac636dea3b877
+Got: 2bfe00c5112b0d2a680cd01144701f8937846096
+Archive: /Users/dinny/Library/Caches/Homebrew/qt-4.8.0.bottle.tar.gz
+(To retry an incomplete download, remove the file above.)
+```</p>
+
+<p>这个问题更新了brew就没问题了：</p>
+
+<p><code>bash
+dinny-macbook-air:linkchecker dinny$ brew update
+dinny-macbook-air:linkchecker dinny$ brew install pyqt
+==&gt; Installing pyqt dependency: qt
+==&gt; Downloading https://downloads.sf.net/project/machomebrew/Bottles/qt-4.8.0-bottle.tar.gz
+File already downloaded in /Users/dinny/Library/Caches/Homebrew
+==&gt; Pouring qt-4.8.0.bottle.tar.gz
+==&gt; Caveats
+We agreed to the Qt opensource license for you.
+If this is unacceptable you should uninstall.
+==&gt; Summary
+/usr/local/Cellar/qt/4.8.0: 2722 files, 193M
+==&gt; Installing pyqt
+</code></p>
+]]></content>
+  </entry>
+  
+</feed>

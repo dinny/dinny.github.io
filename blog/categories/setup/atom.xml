@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Setup | DIVING FOR FUN]]></title>
+  <link href="http://dinny.github.io/blog/categories/setup/atom.xml" rel="self"/>
+  <link href="http://dinny.github.io/"/>
+  <updated>2014-04-27T16:25:24+08:00</updated>
+  <id>http://dinny.github.io/</id>
+  <author>
+    <name><![CDATA[Dinny Wu]]></name>
+    <email><![CDATA[backtickcode@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Setting Up Octpress for Github Pages on Linux]]></title>
+    <link href="http://dinny.github.io/blog/2012/02/15/setting-up-octpress-on-github/"/>
+    <updated>2012-02-15T21:00:00+08:00</updated>
+    <id>http://dinny.github.io/blog/2012/02/15/setting-up-octpress-on-github</id>
+    <content type="html"><![CDATA[<p>I have used <a href="http://wordpress.org/">WordPress</a> for more than 3 years. Yet recently I decided to switch to <a href="http://octopress.org/">Octopress</a> for personal notes. WordPress is too heavy to use, and it needs a lot of effort on configuring, which makes me feel bad. Besides that, I need to rent a space to set things up. Octopress relies heavily on <a href="http://www.ruby-lang.org/en/">Ruby</a>, which is used as my main develop language these days. And Github Pages supports Octopress. Therefore you can just use Octopress as your personal blog, generate static pages and put them onto Github. This article talks about how to set things up for a Github blog.</p>
+
+<h2>Ruby Environment Setup</h2>
+
+<p>Ruby is out of box for most Linux distributions. You can install <a href="https://rvm.io/">rvm</a> to make managing various Ruby versions and environments easier.</p>
+
+<p><code>bash
+$ curl -L https://get.rvm.io | bash -s stable --ruby
+</code></p>
+
+<p>Then you can list the installed Ruby versions by inputting:</p>
+
+<p>``` bash
+$ rvm list</p>
+
+<p>rvm rubies</p>
+
+<p>   ruby-1.9.2-p320 [ x86_64 ]
+=* ruby-1.9.3-p194 [ x86_64 ]</p>
+
+<h1>=> &ndash; current</h1>
+
+<h1>=* &ndash; current &amp;&amp; default</h1>
+
+<h1>* &ndash; default</h1>
+
+<p>```</p>
+
+<p>Then install bundler to manage the gemsets you need for working on different machines:</p>
+
+<p><code>bash
+$ gem install bundler
+Fetching: bundler-1.2.1.gem (100%)
+Successfully installed bundler-1.2.1
+1 gem installed
+Installing ri documentation for bundler-1.2.1...
+Installing RDoc documentation for bundler-1.2.1...
+</code></p>
+
+<blockquote><p>Note: If you got any error here, please install <strong>libssl-dev</strong> package(on Debian). It&rsquo;s neccessary when building the openssl gem. You can install it by typing <strong>sudo apt-get install libssl-dev</strong> in the console.</p></blockquote>
+
+<h2>Basic Configuration</h2>
+
+<p>If you want to hold your blog with URL like this: <a href="http://your-username.github.com,">http://your-username.github.com,</a> you need to create a project named &ldquo;your-username.github.com&rdquo; on Github.</p>
+
+<p>Then you need to get a copy of source of Octopress and do some basic setup:</p>
+
+<p><code>bash
+$ git clone https://github.com/imathis/octopress.git octopress
+$ cd octopress
+$ bundle update
+$ rake install
+$ rake setup_github_pages
+</code></p>
+
+<p>It will do below tasks:</p>
+
+<ul>
+<li>Ask you for your Github Pages repository url.</li>
+<li>Rename the remote pointing to imathis/octopress from &lsquo;origin&rsquo; to &lsquo;octopress&rsquo;</li>
+<li>Add your Github Pages repository as the default origin remote.</li>
+<li>Switch the active branch from master to source.</li>
+<li>Configure your blog&rsquo;s url according to your repository.</li>
+<li>Setup a master branch in the _deploy directory for deployment.</li>
+</ul>
+
+
+<p>When it prompts for the git repository URL, you need to provide a full URL to that git repo, like this: <strong>git@github.com:username/username.github.com.git</strong> (Replace <code>username</code> with actual username).</p>
+
+<h2>Generate Posts and Deploy</h2>
+
+<p>After that, you can generate a new post like this:</p>
+
+<p><code>bash
+$ rake new_post\["Setting up Octpress on Github"\]
+mkdir -p source/_posts
+Creating new post: source/_posts/2012-02-25-setting-up-octpress-on-github.markdown
+</code></p>
+
+<p>Then you can edit that markdown file with your favorite markdown editor(I prefer retext on Linux).</p>
+
+<p><code>bash
+$ retext source/_posts/2012-02-25-setting-up-octpress-on-github.markdown
+</code></p>
+
+<p>After you have added your contents, simply run below commands:</p>
+
+<p><code>bash
+$ rake generate
+$ rake deploy
+</code></p>
+
+<p>It will generate the static blog pages, copy the generated files into _deploy/, add them to git, commit and push them up to the master branch.</p>
+
+<p><strong>Don&rsquo;t forget to submit the markdown file to source branch.</strong></p>
+
+<p><code>bash
+$ git add .
+$ git commit -m 'Publish my first blog post.'
+$ git push origin source
+</code></p>
+
+<p>After several minutes, you can open the URL *<a href="http://your-username.github.com*">http://your-username.github.com*</a> with your favorite browser to check if it has the content as expected.</p>
+
+<h2>Others</h2>
+
+<p>If you want to update Octopress with latest changes from the original repo, you can do it like this:</p>
+
+<p><code>bash
+$ cd octopress
+$ git remote add upstream https://github.com/imathis/octopress.git
+$ git pull upstream
+$ git push
+</code></p>
+
+<p>An alternative way is before you do any modification after the git clone, you can run below commands:</p>
+
+<p><code>bash
+$ cd octopress
+$ git remote rename origin upstream
+</code></p>
+
+<p>Then you can get the latest changes by typing:</p>
+
+<p><code>bash
+$ cd octopress
+$ git pull upstream
+$ git push
+</code></p>
+
+<h2>References</h2>
+
+<ul>
+<li><a href="http://www.zhubert.com/blog/2012/04/26/getting-started-with-octopress/">zhubert&rsquo;s Getting Started With Octopress</a> on his blog.</li>
+<li><a href="http://octopress.org/docs/deploying/github/">Octopress' Github Deploy Guide</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

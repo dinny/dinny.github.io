@@ -1,0 +1,366 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Bash命令行编辑及编码风格约定 - DIVING FOR FUN</title>
+  <meta name="author" content="Dinny Wu">
+
+  
+  <meta name="description" content="Bash命令行编辑与Readline 近年来看了不少介绍Linux命令行和shell编程方面的书，包括我翻译的这本《Linux命令行与shell脚本编程大全（第2版）》。尽管这些书都中规中矩地介绍了命令行常用的命令、shell的启动配置、shell的环境变量及shell编程的种种， &hellip;">
+  
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  
+  <link rel="canonical" href="http://dinny.github.io/blog/2012/08/01/bash-commandline-editing-and-coding-style">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="DIVING FOR FUN" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <div id="sidebar_control"></div>
+  <div id="sidebar">
+    <div class="logo">
+      .krnl
+    </div>
+    <div class="content hide">
+      <section role="navigation">
+        <header role="banner"><hgroup>
+  <h1><a href="/">DIVING FOR FUN</a></h1>
+  
+    <h2>Tech Notes from Dinny Wu</h2>
+  
+</hgroup>
+
+</header>
+        
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:dinny.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/publication">Publication</a></li>
+  <li><a href="/about-dinny">About Me</a></li>
+  <li><a href="/atom.xml">Atom</a></li>
+</ul>
+
+
+      </section>
+      
+        <section>
+  <h1>About Dinny</h1>
+  <div id="about_dinny">
+     <p>A code monkey. Working for <strong>Backtick Code</strong>.</p>
+  </div>
+  <div></div>
+</section>
+<section>
+  <h2>recent</h2>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/07/26/how-to-make-remote-work-powerful/">也谈团队远程工作 - 如何让远程工作更有效</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/04/20/some-tools-after-firewall/">如何给一些Mac命令行工具设置代理服务器</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/04/13/on-hacker/">从一个问题的答案想到的黑客</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/04/06/notify-your-commandline-growl-libnotify/">Notify Your Commandline - Growl and Libnotify</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/12/31/2012-summary/">写在跨年</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h2>github</h2>
+  
+  <a href="https://github.com/dinny">@dinny</a>
+  
+  <ul id="gh_repos">
+  </ul>
+</section>
+
+
+      
+    </div>
+  </div>
+  <div id="main">
+    <div class="content">
+      <article class="hentry" role="article">
+  
+  
+    <header>
+      <div class="back"><a href="/" onclick="history.go(-1);return false;">← Back</a></div>
+      <h1 class="entry-title">Bash命令行编辑及编码风格约定</h1>
+    </header>
+  
+  <div class="entry-content"><h2>Bash命令行编辑与Readline</h2>
+
+<p>近年来看了不少介绍Linux命令行和shell编程方面的书，包括我翻译的这本<a href="http://book.douban.com/subject/11589828/">《Linux命令行与shell脚本编程大全（第2版）》</a>。尽管这些书都中规中矩地介绍了命令行常用的命令、shell的启动配置、shell的环境变量及shell编程的种种，但鲜有书肯花一定的篇幅来介绍跟shell交互时命令行编辑方面的内容，而命令行编辑在日常的命令行使用中恰恰非常重要。bash的命令行编辑功能由<a href="http://cnswww.cns.cwru.edu/php/chet/readline/rltop.html">Readline</a>提供。很多脚本语言的交互式shell的行编辑功能也都由该库提供。比如Python和gnuplot的交互式shell。但由于许可证（Readline采用GPLv3）带来的授权方面的限制，有些脚本语言的交互式shell采用其他一些行编辑库，如<strong><a href="http://www.thrysoee.dk/editline/">libedit</a></strong>、<strong><a href="http://www.astro.caltech.edu/~mcs/tecla/">Tecla</a></strong>等等。也有出于其他考虑使用自有行编辑库的shell，比如zsh使用的就是自己的<a href="http://zsh.sourceforge.net/Guide/zshguide04.html">zle</a>（所以zsh的自动补全机制跟bash的也有所不同）。</p>
+
+<blockquote><p>注意：这里说的命令行编辑（Commandline Editing）跟命令行编辑器（Commandline Text Editor）不同。命令行编辑是指在交互式命令行上对输入的命令进行编辑，而命令行编辑器则是指可在命令行界面中使用的用来编辑文本文件的编辑器，比如<strong>Vim</strong>或<strong>Emacs</strong>都是命令行编辑器。而sed和awk虽然也能处理文本，但它们是用来对文本流进行处理的，所以称为流编辑器（Stream Editor）。</p></blockquote>
+
+<p><strong>Readline</strong>主要提供的命令可分为以下几类：</p>
+
+<ul>
+<li>光标移动命令</li>
+<li>历史记录命令</li>
+<li>文本修改命令</li>
+<li>文本复制和删除命令</li>
+<li>自动补全命令</li>
+<li>键盘宏命令</li>
+<li>其他命令</li>
+</ul>
+
+
+<p>具体每个分类都包含哪些命令，可以参考<a href="http://www.gnu.org/software/bash/manual/bashref.html#Readline-Interaction">bash官方文档中相关的介绍</a>。这里就每个分类举几个例子。</p>
+
+<h3>光标移动命令</h3>
+
+<ul>
+<li>移到行首：<code>ctrl + a</code></li>
+<li>移到行尾：<code>ctrl + e</code></li>
+<li>向前移动一个字符：<code>ctrl + f</code></li>
+<li>向后移动一个字符：<code>ctrl + b</code></li>
+<li>清空屏幕：<code>Ctrl + l</code></li>
+</ul>
+
+
+<h3>历史记录命令</h3>
+
+<ul>
+<li>前一历史命令：<code>ctrl + p</code></li>
+<li>后一历史命令：<code>ctrl + n</code></li>
+<li>逆向搜索历史命令：<code>ctrl + r</code></li>
+<li>向前搜索历史命令：<code>ctrl + s</code></li>
+</ul>
+
+
+<h3>文本修改命令</h3>
+
+<ul>
+<li>删除当前光标下字符：<code>ctrl + d</code></li>
+<li>要输入类似<code>^Q</code>这样的按键组合，可以先按下<code>ctrl + v</code>，然后再按下<code>ctrl + q</code></li>
+<li>将光标前面的字符和光标下的字符互换顺序：<code>ctrl + t</code></li>
+</ul>
+
+
+<h3>文本复制和删除命令</h3>
+
+<ul>
+<li>删除光标至行尾的字符：<code>ctrl + k</code></li>
+<li>删除光标至行首的字符：<code>ctrl + u</code></li>
+<li>删除光标前的一个单词：<code>ctrl + w</code>（以空格作为单词分割符，并会将删掉的内容放到kill ring中）</li>
+<li>将kill ring顶部的内容复制到在当前位置：<code>ctrl + y</code></li>
+</ul>
+
+
+<h3>自动补全命令</h3>
+
+<ul>
+<li>自动补全：<code>TAB</code></li>
+<li>列出可能的补全内容是文件名：<code>ctrl + x /</code></li>
+<li>列出可能的补全内容是用户名：<code>ctrl + x ~</code></li>
+<li>列出可能的补全内容是变量：<code>ctrl + x $</code></li>
+<li>列出可能的补全内容是主机名：<code>ctrl + x @</code></li>
+<li>列出可能的补全内容是命令：<code>ctrl + x !</code></li>
+</ul>
+
+
+<h3>键盘宏命令</h3>
+
+<ul>
+<li>开始录制宏：<code>ctrl + x (</code></li>
+<li>结束录制宏：<code>ctrl + x )</code></li>
+<li>运行宏：<code>ctrl + x e</code></li>
+</ul>
+
+
+<h3>其他命令</h3>
+
+<ul>
+<li>重新读取配置文件：<code>ctrl + x</code> <code>ctrl + r</code></li>
+<li>撤销前面的操作：<code>ctrl + x</code> <code>ctrl + u</code></li>
+<li>设置标记：<code>ctrl + @</code></li>
+<li>交换标记和光标的位置：<code>ctrl + x</code> <code>ctrl + x</code></li>
+<li>显示当前shell的版本信息：<code>ctrl + x</code> <code>ctrl + v</code></li>
+<li>启动编辑器编辑命令，编辑完成后执行：<code>ctrl + x</code> <code>ctrl + e</code></li>
+</ul>
+
+
+<h2>Bash编码风格规范</h2>
+
+<p>正是Bash跟Linux系统的深度融合，所以一直以来人们都将Bash当成一门不严肃的语言。有时候甚至只是当作一个用来将命令记录下来的工具。如果你只是要用Linux做一些简单的配置和系统管理，那采取这种做法还姑且过得去。而在要构建复杂的工具时，人们通常会借助Python或Ruby一类编程语言来构建脚本，它们能够提供更高级的数据类型供程序使用。但如果你要采用bash来构建较大型的命令行工具时，你就必须遵循一定的编码风格规范。如果你们的项目还没有明确的编码风格规范，那可以参考<a href="http://lug.fh-swf.de/vim/vim-bash/StyleGuideShell.en.pdf">这份编码规范</a>。</p>
+</div>
+  <footer>
+    <div class="articlemeta">
+      <span class="hide">
+        
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/bash/'>bash</a>, <a class='category' href='/blog/categories/shell/'>shell</a>
+  
+</span>
+
+ @
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-01T21:00:00+08:00" pubdate data-updated="true">Aug 1<span>st</span>, 2012</time>
+      </span>
+      <span class="plus">
+        
+          <a href="#">+</a>
+        
+      </span>
+    </div>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <div class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/07/15/set-up-subversion-repos-with-apache-and-ssl/" title="Previous Post: Set up Subversion Repos with Apache and SSL">&laquo; Set up Subversion Repos with Apache and SSL</a>
+      
+    </div>
+  </footer>
+
+
+</article>
+
+  <section>
+    <div class="hide" id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+
+    </div>
+    <footer role="contentinfo"><div class="content">
+  <p>
+    Copyright &copy; 2014 Dinny Wu
+  </p>
+</div>
+
+</footer>
+    
+
+<script type="text/javascript">
+  disqus_shortname = 'divingforfun';
+  
+    disqus_identifier = 'http://dinny.github.io/blog/2012/08/01/bash-commandline-editing-and-coding-style/';
+    disqus_url = 'http://dinny.github.io/blog/2012/08/01/bash-commandline-editing-and-coding-style/';
+    function loadDisqus() {
+      
+      // var disqus_developer = 1;
+      var disqus_script = 'embed.js';
+      (function () {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }());
+    }
+  
+  (function () {
+    var disqus_script = 'count.js';
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+  <script src="/javascripts/modernizr-2.0.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+<script src="/javascripts/libs/respond.js" type="text/javascript"></script>
+<script src="/javascripts/octopress.js" type="text/javascript"></script>
+
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+  <script type="text/javascript">
+  $(document).ready(function(){
+    if (!window.jXHR){
+      var jxhr = document.createElement('script');
+      jxhr.type = 'text/javascript';
+      jxhr.src = '/javascripts/libs/jXHR.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(jxhr, s);
+    }
+
+    github.showRepos({
+      user: 'dinny',
+      count: 5,
+      skip_forks: true,
+      target: '#gh_repos'
+    });
+  });
+  </script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+  var userAgent = navigator.userAgent.toLowerCase();
+  var isiPhone = (userAgent.indexOf('iphone') != -1 || userAgent.indexOf('ipod') != -1) ? true : false;
+  var isAndroid = (userAgent.indexOf('android') != -1) ? true : false;
+  clickEvent = (isiPhone || isAndroid) ? 'touchstart' : 'click';
+  $('#sidebar').on(clickEvent, function() {
+    $(this).toggleClass('open');
+  });
+  $('.articlemeta').on(clickEvent, function() {
+    toggleDisqus();
+    $(this).toggleClass('open');
+  });
+});
+</script>
+
+</body>
+</html>

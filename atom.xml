@@ -1,0 +1,1036 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[DIVING FOR FUN]]></title>
+  <link href="http://dinny.github.io/atom.xml" rel="self"/>
+  <link href="http://dinny.github.io/"/>
+  <updated>2014-04-27T16:25:24+08:00</updated>
+  <id>http://dinny.github.io/</id>
+  <author>
+    <name><![CDATA[Dinny Wu]]></name>
+    <email><![CDATA[backtickcode@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[也谈团队远程工作 - 如何让远程工作更有效]]></title>
+    <link href="http://dinny.github.io/blog/2013/07/26/how-to-make-remote-work-powerful/"/>
+    <updated>2013-07-26T21:00:00+08:00</updated>
+    <id>http://dinny.github.io/blog/2013/07/26/how-to-make-remote-work-powerful</id>
+    <content type="html"><![CDATA[<p>最近有同事问我，远程工作到底是怎样一种形式，能否在他的团队中推广试用，以及采用这种工作方式的话如何更有效地管理团队——团队成员之间依然能保持较好的协作和较高的效率。回答这个问题显然不是三五分钟的事情。首先要足够了解自己团队中每个成员的做事方式，才能考虑是否要进行这种转型。相对来说，如果在组建团队的开始阶段就明确了这种方式，那要比现在再去调整容易一些。采用远程方式协作的团队在招聘时，对候选人在<strong>self-motivation</strong>和<strong>self-management</strong>方面的要求要更高一些。要开始推行这种方式，就得明白它的前提条件和适用场景。</p>
+
+<p>在国外，远程工作已经逐渐被人们接受，不少公司都采用了这种方式。这里列几个大家可能听过的名字：<strong>37signals</strong>，<strong>GitHub Inc.</strong>，<strong>Intridea</strong>，<strong>Canonical Ltd.（Ubuntu Maker）</strong>。而实际上支持远程办公的公司还要多得多，比如你可能没想到的<strong>Wind River Systems</strong>，<strong>Red Hat</strong>，<strong>SUSE Labs</strong>，<strong>Cisco Systems</strong>。其中一些公司的产品本身也是为了解决远程工作中的沟通、管理和协作的问题：GitHub的存在是为了解决远程协作开发的问题；37signals的一些产品也是为了解决远程管理项目的实际需要。</p>
+
+<p>但在国内，远程工作依然是个新名词。之前有朋友尝试在他的公司内推行弹性工作时间 + 远程工作的方式。最开始团队只有五六个人时（基本都是一开始的合伙人），这种做法还可行，大家都比较投入，项目完成状况还好。但等到团队到了十人，他再也不提倡这么做了——已经有成员的工作效率大幅下降了，他还要费尽心思去想怎么fire掉这名新进的员工比较合适。</p>
+
+<p>在我之前工作的Intridea，几乎所有人员（包括PM、UX、DEV、QA）都是远程工作，除了公司负责销售和市场的高层每周要在办公室工作三天——相当于值班。当时团队的规模已经过三十人，而我们QA组要跟所有其他组一起协作，所以这中间的沟通、协作完全是建立在彼此完全信任、个人有很强的自我管理和激励的基础上。下面我就从远程工作的基础和前提条件说起。</p>
+
+<h2>What? Why? Who? When？Where? How?</h2>
+
+<p>我们先要理清远程工作的<strong>5W1H</strong>。<strong>What</strong>说的是远程工作的定义，也即团队成员通过网络、电话等方式来实现跟团队内其他成员异地协作的工作方式。跨国公司中常见的多个site之间合作完成一个项目算不算是远程协作呢？这也是远程工作方式中的一种，只不过跟我们今天要讨论的有一点微小的差异，那就是前一种方式中每个site的团队成员都是在同一office工作的，而后一种方式中所有人都处于不同的地理位置。</p>
+
+<p>那我们为什么要远程协作呢（<strong>Why</strong>）？理由可能有很多种。常见的有：吸引适合我们团队的异地人才加入、有助于推动员工的工作-家庭生活平衡、避开城市中交通问题带来的时间开销、服务位于不同地理位置（甚至不同时区）的客户、降低公司的运营成本（办公区租金、物业、办公设施开销），等等。</p>
+
+<p>哪些人员可以通过远程协作完成工作呢（<strong>Who</strong>）？主要有两类人群。一是跟团队其他成员工作的直接耦合性并不高的工种，比如IT行业的UI设计师、Dev、QA、安全顾问，这些工作都可以直接通过项目管理工具和远程交流工具来进行沟通协作，比如Skype、HipChat、Unfuddle、GitHub等。第二类是客观条件和实际需求使然，团队无法直接在一起协作，比如跨星球能源开采（参考电影<strong>Moon</strong>）、户外作业、卫星监测、销售人员等。</p>
+
+<p>那远程协作时工作时间怎么协调呢（<strong>When</strong>）？对于耦合比较紧的团队（业务密集型），可以采用每天固定工作时间段的方式，如早9:00 &ndash; 12:00，13:30 &ndash; 18:30，所有人在这个时间段都处于在线的状态（IM上能找到）。对于外包类型的团队，可以采用弹性工作，每天只要保持同时在线若干小时方便沟通即可（如14:30 &ndash; 17:30）。</p>
+
+<p>远程工作时在什么地方好呢（<strong>Where</strong>）？每个人偏好不太一样，但最好选择能提高你工作效率的空间。比如平时写代码在家里写，安静，有助于提高效率；如果是一些不需要很聚精会神的工作，会去咖啡馆或是图书馆，听听音乐或是空闲翻翻书。以前在杭州的Beta咖啡和纳帕咖啡也看到有人在那边写代码。如果你是要交流的话，出去选个地方还是比较靠谱的。</p>
+
+<p>那么远程工作如何协调比较好呢（<strong>How</strong>）？首先，在组建团队时，要注意考察候选人的自我管理能力。或者这里用自我发展能力更好。如果个人没有清晰的目标，那么这种周围无人监督的环境很容易滋生懒惰情绪和拖延习惯。如果一个人能自发去参与一些开源项目，自愿去参与一些技术资料的本地化工作，那这个人对技术就有一定的热忱，这种人往往是团队里的千里眼，在一些方案的实现上应该多听听他的建议。其次，在划分任务时也尽可能降低耦合，或者根据个人的性格来划分任务。如自制力好的人就给他尽量安排一些单独的模块，自制力不好的人给他多安排一些耦合多的任务。最后，也要尽可能地照顾到个人目标。比如有人就是想一面工作一面旅行，那么可以提前约定好每天工作时间只有六小时，但每天都要有一两个小时的在线沟通预算。</p>
+
+<p>虽然远程工作有一定的优势，但也有很多问题：</p>
+
+<ul>
+<li>对团队的管理跟在办公室不同，对耦合较多的项目来说，沟通工具上要做的准备工作更多。</li>
+<li>团队内部的沟通不如在办公室那么方便：有时要找的人不在线，就无法进行未做预约的临时沟通。</li>
+<li>团队情感方面，虽然有些情况下团队情感可能会比在同一个办公室还要好（当然，需要一些方式，我后面会介绍），但远距离的沟通跟近距离的午饭时间沟通比还是更容易形成孤独感，尤其是对没有伴侣的成员。</li>
+<li>干扰。在家工作的话，可能会有家人、亲戚会认为你在家就是有空，临时过来聊天吃饭聚。这对正常的工作安排有一定的冲击。这些临时的事很可能会打断你做了一半的任务。</li>
+<li>对网络的重度依赖（尤其是IT工作），需要你有一个非常稳定的网络。</li>
+</ul>
+
+
+<p>理清了这些基本概念，我们来从不同角度看看如何更好的管理远程团队。</p>
+
+<h2>团队组建</h2>
+
+<p>招聘前，要做一些准备工作。现有团队成员可自愿组成招聘委员会，以从多个角度考察候选人的实际能力。这很重要，今天的候选人，很有可能就是以后工作上的合作伙伴，所以面试中的印象很重要。但同时招聘负责人也应周知招聘委员会在面试时应重点考察的几个方面、面试记录中尽可能记录面试中候选人说的事实，而不是面试官的主观感受，以便对诸多候选人有比较一致、公平的考察方向。</p>
+
+<p>招募团队时要强调自主性，尽量吸收有自我发展动力和目标的员工；同时，候选人至少要在某一方面有亮点，或是有很好的基础 + 浓厚的兴趣。这样才能提高整体团队的战斗力。</p>
+
+<p>招募的范围集中在技术社区。虽然在其他地方也会有优秀人才，但在同一社区活动的成员，往往更容易在技术认识或做事方式上达成共识。当然，这不是说你要关上其他的门，而是说这是发现可用人才的重要途径。</p>
+
+<p>员工推荐的朋友/前同事，往往也很靠谱。并不是说，每个推荐过来的候选人都很靠谱，但愿意联系你们的人至少跟目前的团队成员、他的前同事有一些共识，所以才会考虑加入这个团队。通过猎头这种方式，怕的不是猎头收取推荐费用，而是怕碰到不懂行的猎头推荐来不靠谱的人。</p>
+
+<p>在面试时，应明确告诉团队成员为何要进行远程工作，而不是在办公室工作。这样一个简单的告知，可以让团队的信息更透明。同时，告知团队的考量矩阵（技术外）：热忱度、离席率、可靠性、沟通能力、结果驱动、耐心等等。这些维度能够指引他们更好地做事、更好地跟别人一起做事。</p>
+
+<p>达成默契时，要有虚拟工作合同，定期更新合同，让大家都明白这是一种正式的合作关系。比如之前在Intridea，由于公司在中国没有法人代表，我们签署的合同充其量也只是形式上的，并不具备法律效力，只是个君子之约。但签合同和没签合同的责任感还是不一样的。</p>
+
+<p>试用期内做好考察工作（投入度、技术能力、沟通能力）。试用期可以是短期兼职，如果你要考察的仅仅是技术能力的话。但我建议试用期最好还是全职比较好，这样你可以考察新人的综合方面（尤其是投入度）。</p>
+
+<p>另外，团队应收集、设定成员每年的发展目标和任务目标，年终安排固定时间来做业务表现评定，以便以后加薪、提升参考。</p>
+
+<h2>工作方式</h2>
+
+<p>合理的工作方式，能够保证协作更高效。所以在团队组建之初，就应该有一些明确的流程和要求，才不至于形成惯性、以后很难推动。</p>
+
+<p>每个模块都要有一个负责人，另外一个人备份，但只是备份，不是负责人。两个负责人，等于没有负责人。当然，双轨制有一定的作用，但更适合规模已经成型的大团队。</p>
+
+<p>每天都应有虚拟站立会议（10-15分钟），所有人都要冒泡。会后是跟他人沟通的最佳时段。这是每天团队成员希望自己碰到的一些问题得到解答的最佳时机。</p>
+
+<p>每天都应提交工作时间表，顺便写一下当天完成的事情、碰到的问题和要做的事（与前面站立会议略有冲突，但可以侧重一下完成性）。</p>
+
+<p>团队应固定在某个聊天渠道上，如Skype或Gtalk，保证大家工作时处于在线状态，而不是一会儿Gtalk、一会儿Skype。</p>
+
+<p>团队每天应尽可能有一段固定工作时间，跟其他人有个重叠的时间段，这样不管有没有时区的限制，都能让别人在这个时间段内能找到你。如果你要找某人确认某些事，而他不在线，那就拿起电话（否则为什么要让你知道他的电话）。</p>
+
+<p>需要所有开发人员都知道的公共性内容应该放在项目的README、docs或wiki上（推荐README），比如项目简介、Coding Style、API规范等；需要所有QA人员知道的公共性内容都集中放在wiki的某个页面上，更好地组织起来，而不是散落在各处。</p>
+
+<p>项目完成后进行项目总结会，总结好的做法和不好的做法。每个项目结束都应该有这样一个活动，同一个错误不能犯两次。</p>
+
+<p>跟行政部门沟通好，电话费、VPN费用一定要报销。远程工作是有成本的，公司应承担这部分开销，没有道理让个人承担。</p>
+
+<h2>分享和文化</h2>
+
+<p>除了工作方式，多一些团队的分享和活动，可以增加团队内部的熟悉程度和情感交流。尽可能安排一些团队碰面的机会，增加面对面了解其他人的机会。</p>
+
+<ul>
+<li>多组织团队参加行业性技术会议（Linux有Linux Kernel Conference、HelloGCC；Ruby有Ruby Conference China、Ruby Tuesday）。当然，参加这些会议是有风险的，团队里牛逼的人做个分享，很有可能被别人挖走。但只要有不错的薪酬、优秀的团队文化和目标，聪明人还是会选择留下来的。</li>
+<li>参加一些本地的技术讨论组（BLUG &ndash; Beijing Linux User Group，BPyUG &ndash; Beijing Python User Group等）。这些本地活动能让团队成员在各自的地方多一些本地的圈内朋友，开阔视野。</li>
+<li>小规模集体旅游、娱乐等线下集合。懂得放松的团队才能更好的做事。相对来说，远程工作的人更喜欢融入团队短暂的聚会中。大家都很珍惜短暂的相聚，也是线上交流无法替代的交流机会。</li>
+<li>多组织团队每年的全公司/区域性的聚会。可以安排在相对固定的时间，最好是一些技术会议附近，这样可以比较长时间的在一起聚聚。</li>
+<li>每周的周会（固定时间，1到2个小时），不一定是讨论工作计划，也可以用来交流技术、联络感情。除了技术性topic分享，还可以分享相应的好玩的一些爱好等（如滑雪、钓鱼、滑翔伞、马拉松、攀岩、穿越、摄影、视频制作、行业数据分析、创业产品浏览等）。</li>
+<li>企业内部微博。可以分享一些技术性知识，也可以分享一些好玩的内容，或是自己对产品的一些想法。</li>
+<li>开设团队Blog。除了供内部交流外，也可以提高在外界的影响力。这对团队的长期发展很有好处。</li>
+<li>团队内部Email新闻。类似于Developer Weekly或JavaScript Weekly，不过这份周刊不讨论技术，更多的讨论整个团队这周都在做什么；团队最近的总动向；最近谁有休假安排；还有最近是谁的生日，如何庆祝等。</li>
+<li>安排一定的奖励，年终时选出年度贡献大的人，可以是多个奖项。</li>
+</ul>
+
+
+<h2>工具</h2>
+
+<p>选用正确的工具,让每个成员获取项目信息不再痛苦，这样大家才更愿意去查看项目信息，获知项目进度和问题。我把工具放到最后，并不代表它不重要，而是理解了组建团队、团队工作方式和沟通中的需求，才能明确什么样的工具更合适：</p>
+
+<ul>
+<li>VPN（Fuck GFW），我们生活在墙内，应时不时“展开壁外调查”。稳定的VPN很重要。之前用过VPN520，可惜后来很不稳定。当然，现在防火长城这么厉害，也应时不时地改改MTU。</li>
+<li>Email &amp; Calendar：Google。没用过其他服务，Google的服务在各种平台上的兼容性很好，尤其是移动设备上。</li>
+<li>项目管理工具：Unfuddle、BaseCamp。Unfuddle的项目流程做得很全，定制性也很好，但由于JavaScript量太大，有些浏览器上会占用大量资源。但相对来说，还是比BaseCamp好用。</li>
+<li>版本控制工具：Git（GitHub/Bitbucket/Self-hosted）、hg和Bazaar。用分布式的版本控制工具吧，不要再为了离线状态无法提交代码而苦恼可。我理解不了为什么现在还有人在用Centralized VCS，但如果一定要用（比如要用历史遗留下来的版本库），那最多也就用用SVN好了。</li>
+<li>团队沟通工具：IRC、HipChat、Skype、Yammer（文本性的）；FaceTime，Skype，Google Hangouts（视频）。你不需要全部都用，各个分类里选一个好用的就可以了。HipChat和Skype给我留下了很深的印象。但如果你们的团队聚集了一帮开源爱好者，IRC也是很好的选择。</li>
+<li>桌面共享工具：TeamViewer、ScreenSharing.app、WebEx、Skype、Google Hangouts、RealVNC、iMessage、join.me、logmein.com。同上，选用一个合适的就好。之前用的WebEx还是不错的；Skype会有点卡；至于join.me，用的不多。</li>
+<li>终端共享工具：tmux。不要跟我说，你现在更新网站还是通过ftp上传文件。这已经是上个世纪的事情了。要登服务器、要用命令行，就得用合适的工具。</li>
+<li>语音会议工具：GoToMeeting、WebEx、Cisco Conference Call、iMessage、Skype、FaceTime、Gtalk、Google Hangouts。一样，选用你喜欢的就好。相对来说，GoToMeeting要稳定一些。不过它要求使用跟会议建立者相同版本的客户端，有时你不得不提前十几分钟去下载某个指定版本，比较痛苦。</li>
+<li>文档协作工具：wiki。虽然有各种开源的wiki（TWiki、MediaWiki、MoinMoinWiki），但我依然认为Confluence最靠谱，其它几种wiki光插件就够你折腾一两天的。</li>
+<li>CI服务器：Jenkins、CruiseControl、Bamboo、TeamCity。如果你还记得Hudson这个名字，请一定将它符号链接到Jenkins。如果没有特殊需求，建议就用Jenkins好了，成熟的框架，插件多，出了问题也好寻求帮助。</li>
+<li>时间管理工具：Harvestapp。我也尝试寻找过其他的Time Tracking工具，都不是太好用。这个中规中矩。</li>
+<li>除此之外，还有物理的：光线充足的工作间、宽敞的桌子和人体工学座椅、站立式办公桌、人体工学键盘鼠标、摄像头、耳麦等等。哦，别忘了，还有稳定的网络！</li>
+</ul>
+
+
+<p>今天的内容有点多。远程团队管理的内容加起来也够一本小书了。这里只是列一些以前的经验和自己的一些想法。实际上，这些工作方式在后来我跟晓亮、邓强协作，翻译技术书籍时也用过。不过我们并非完全陌生的团队，所以要简单得多。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[如何给一些Mac命令行工具设置代理服务器]]></title>
+    <link href="http://dinny.github.io/blog/2013/04/20/some-tools-after-firewall/"/>
+    <updated>2013-04-20T21:00:00+08:00</updated>
+    <id>http://dinny.github.io/blog/2013/04/20/some-tools-after-firewall</id>
+    <content type="html"><![CDATA[<p>在公司环境里，有些工具在防火墙后面无法直接使用，必须通过HTTP/HTTPS代理服务器才能访问外网的数据。通常，在命令行环境中设置好HTTP_PROXY和HTTPS_PROXY环境变量就能使用（如curl）：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>➜  ~  <span class="nb">export </span><span class="nv">HTTP_PROXY</span><span class="o">=</span>http://192.168.80.100:3128/
+</span><span class='line'>➜  ~  <span class="nb">export </span><span class="nv">HTTPS_PROXY</span><span class="o">=</span>https://192.168.80.100:3128/
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>但下面这些工具需要特殊设置：</p>
+
+<ul>
+<li>homebrew：设置了HTTP_PROXY也不行，还是不能用。需要设置http_proxy才行。</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>➜  ~  brew install <span class="nv">git</span>
+</span><span class='line'><span class="o">==</span>&gt; Downloading http://git-core.googlecode.com/files/git-1.8.2.1.tar.gz
+</span><span class='line'>
+</span><span class='line'>curl: <span class="o">(</span>7<span class="o">)</span> Failed to connect to 2404:6800:4008:c00::52: No route to host
+</span><span class='line'>Error: Download failed: http://git-core.googlecode.com/files/git-1.8.2.1.tar.gz
+</span><span class='line'>➜  ~  <span class="nb">export </span><span class="nv">http_proxy</span><span class="o">=</span>http://192.168.80.100:3128/
+</span><span class='line'>➜  ~  <span class="nb">export </span><span class="nv">https_proxy</span><span class="o">=</span>https://192.168.80.100:3128/
+</span><span class='line'>➜  ~  brew install <span class="nv">git</span>
+</span><span class='line'><span class="o">==</span>&gt; Downloading http://git-core.googlecode.com/files/git-1.8.2.1.tar.gz
+</span><span class='line'><span class="c">######################################################################## 100.0%</span>
+</span><span class='line'><span class="o">==</span>&gt; make <span class="nv">prefix</span><span class="o">=</span>/usr/local/Cellar/git/1.8.2.1 <span class="nv">CC</span><span class="o">=</span>cc <span class="nv">CFLAGS</span><span class="o">=</span> <span class="nv">LDFLAGS</span><span class="o">=</span> <span class="nv">install</span>
+</span><span class='line'><span class="o">==</span>&gt; make <span class="nv">CC</span><span class="o">=</span>cc <span class="nv">CFLAGS</span><span class="o">=</span> <span class="nv">LDFLAGS</span><span class="o">=</span>
+</span><span class='line'><span class="o">==</span>&gt; make <span class="nv">clean</span>
+</span><span class='line'><span class="o">==</span>&gt; make <span class="nv">CC</span><span class="o">=</span>cc <span class="nv">CFLAGS</span><span class="o">=</span> <span class="nv">LDFLAGS</span><span class="o">=</span>
+</span><span class='line'><span class="o">==</span>&gt; Downloading http://git-core.googlecode.com/files/git-manpages-1.8.2.1.tar.gz
+</span><span class='line'><span class="c">######################################################################## 100.0%</span>
+</span><span class='line'><span class="o">==</span>&gt; Downloading http://git-core.googlecode.com/files/git-htmldocs-1.8.2.1.tar.gz
+</span><span class='line'><span class="c">######################################################################## 100.0%</span>
+</span><span class='line'><span class="o">==</span>&gt; Caveats
+</span><span class='line'>The OS X keychain credential helper has been installed to:
+</span><span class='line'>  /usr/local/bin/git-credential-osxkeychain
+</span><span class='line'>
+</span><span class='line'>The <span class="s1">&#39;contrib&#39;</span> directory has been installed to:
+</span><span class='line'>  /usr/local/share/git-core/contrib
+</span><span class='line'>
+</span><span class='line'>Bash completion has been installed to:
+</span><span class='line'>  /usr/local/etc/bash_completion.d
+</span><span class='line'>
+</span><span class='line'>zsh completion has been installed to:
+</span><span class='line'>  /usr/local/share/zsh/site-functions
+</span><span class='line'><span class="o">==</span>&gt; Summary
+</span><span class='line'>🍺  /usr/local/Cellar/git/1.8.2.1: 1306 files, 27M, built in 47 seconds
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>subversion：在防火墙后面访问不了外面的HTTP repo。需要修改<em>~/.subversion/servers</em>（如果文件不存在需要自行添加）：</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">[</span>groups<span class="o">]</span>
+</span><span class='line'><span class="nv">group1</span> <span class="o">=</span> *.9pm.me
+</span><span class='line'>
+</span><span class='line'><span class="o">[</span>group1<span class="o">]</span>
+</span><span class='line'>http-proxy-host <span class="o">=</span> 192.168.80.100
+</span><span class='line'>http-proxy-port <span class="o">=</span> 3128
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[从一个问题的答案想到的黑客]]></title>
+    <link href="http://dinny.github.io/blog/2013/04/13/on-hacker/"/>
+    <updated>2013-04-13T21:00:00+08:00</updated>
+    <id>http://dinny.github.io/blog/2013/04/13/on-hacker</id>
+    <content type="html"><![CDATA[<p>最近，跟朋友几次聊起代码风格，我隔三岔五地提到<a href="en.wikipedia.org/wiki/Greg_Kroah-Hartman">K-H Greg</a>。我先大概介绍一下。自2000年以来，Greg一直都是Linux Kernel最活跃的开发人员之一，现在是USB、driver core、debugfs、kref、kobject、sysfs等Kernel子模块的维护者。</p>
+
+<p>以前看过他写的两个小工具：</p>
+
+<ul>
+<li>给Linux Kernel项目写的一个提交记录分析工具 &ndash; <a href="http://repo.or.cz/w/git-dm.git">git-dm</a></li>
+<li>将命令行执行的命令通过管道重定向到twitter上的工具 &ndash; <a href="https://github.com/gregkh/bti">bti</a></li>
+</ul>
+
+
+<p>前者用的是Python，后者用的是shell + C。Python的代码风格素来严谨，而shell的代码风格素来粗犷。有心人可以到这两个项目的主页下载代码、看看具体实现中的函数接口和代码风格。在我读过的代码中，这两个项目的代码风格绝对名列前茅。他在代码中很少用一些鲜见的tips或tricks，每条语句都很尽可能清晰易懂、符合规范。</p>
+
+<p>举个最简单的例子，在shell脚本中，他都会记得在函数中给只在函数中用到的变量加上<code>local</code>关键字。这样就防止了在其他函数中或是在调用函数中误用函数中的变量。非常好的处理方式。尤其是对于shell这种很容易出错又很难调试的脚本代码，规范和可读性远比一些技巧更重要。在git-dm中，他设计的基础函数清晰易懂，读起来效率很高，很快就能理清哪段代码做的是什么事情，稍微看一下文档就好了。（除了这部分代码，以前还看过他给kernel提交的补丁。）</p>
+
+<p>高级语言生来就是为了满足人输出代码、理解代码的需要。<strong>可读性要远远高于那些tips或tricks带来的一点点小便宜</strong>。</p>
+
+<p>现在之所以会想到Greg，是因为几个月前的一天，小美问我，我最欣赏的人是谁。这是个太过开放的问题。事实上，各个领域都会有那么一两个人叫你觉得很靠谱。我说，如果将范围限制到我现在从事的领域，那么有两个人，一个是K-H Greg，一个是<a href="http://www.paulgraham.com">Paul Graham</a>。</p>
+
+<p>Greg是最专注的写代码的程序猿之一，可以每天工作超过14个小时，很有贡献精神，热心。最开始接触Linux驱动开发也是基于他写的<a href="http://book.douban.com/subject/1493443/">LDD一书</a>和<a href="http://ftp.be.debian.org/pub/linux/kernel/people/gregkh/ddk/">DDK Live系统</a>。而Paul则通过他独特的思路，促进业界形成了一种新的生态——技术创业。Jobs带来的移动产品革命造福了大众，而Paul发起的产业革命则给行业带来了投资、带来了圈子，使得好的idea得以孵化。Paul在1998年将自己创建的Viaweb卖给Yahoo!拿到第一桶金之后，就着眼投资创业团队。他所创建的YC，今天几乎影响到了所有准备在IT领域创业的年轻人。他写的文章也都有着他自己对行业的见解和理解，很受欢迎。博客中的一些文章经过整理，促成了<a href="http://book.douban.com/subject/6021440/">《黑客与画家》</a>一书。</p>
+
+<p>他们应该算是这个时代我所幸知道的最优秀的黑客中的两个，虽然各自有各自的风格。当然，我不是说，Linus就不是个好厨师。我依然喜欢用git，依然喜欢用Linux。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Notify Your Commandline - Growl and Libnotify]]></title>
+    <link href="http://dinny.github.io/blog/2013/04/06/notify-your-commandline-growl-libnotify/"/>
+    <updated>2013-04-06T21:00:00+08:00</updated>
+    <id>http://dinny.github.io/blog/2013/04/06/notify-your-commandline-growl-libnotify</id>
+    <content type="html"><![CDATA[<p>When using shell, it&rsquo;s a pain to monitor a script with a long execution time. I have to switch between the terminal and other applications, back and forth. If there&rsquo;s a way to send out notifications(here I mean, a valid way that could catch my attention) when some scripts are completed, I can save a piece of time and do a short reading.</p>
+
+<p>On Mac OS X, we have the <strong>Growl</strong> notification service. In the commanline, you can use Growl&rsquo;s commandline tool, <code>growlnotify</code> to send notification to the daemon. For various scripting languages, it has <a href="http://growl.info/documentation/developer/bindings.php">supporting libraries</a>, like <strong><a href="https://github.com/snaka/ruby_gntp">ruby_gntp</a></strong>.</p>
+
+<p>On Linux system, we have <strong><a href="https://developer.gnome.org/libnotify/">libnotify</a></strong>. In the commandline, you can use <code>notify-send</code> command to send notifications to the daemon. On most Linux distributions, this command is packaged in <em>libnotify-bin</em> package.</p>
+
+<h2>Using Growl (Mac OS X)</h2>
+
+<p>Using Growl is very easy. Purchase/install Growl(including commandline tools) and launch it. Then you can send a notification as below:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>growlnotify --appIcon <span class="s2">&quot;time machine&quot;</span> <span class="se">\</span>
+</span><span class='line'>            --title <span class="s2">&quot;Data Backup&quot;</span>  <span class="se">\</span>
+</span><span class='line'>            --message <span class="s2">&quot;Your data backup process has been completed.&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It will look like this.</p>
+
+<p><img src="https://www.evernote.com/shard/s116/sh/7a6e977b-7620-4b92-b6cc-eaa6d00cf764/120cdf1bc1f3c8306345be45bc4b37c9/res/f9645c72-abc0-4c03-a65f-67517272b1e5/skitch.png?resizeSmall&amp;width=832" alt="image" /></p>
+
+<p>In this example, we use some options:</p>
+
+<ul>
+<li>&mdash;appIcon specifies an app icon to use for the notification.</li>
+<li>&mdash;title specifies the title for the notification.</li>
+<li>&mdash;message specifies the text to be the content of the notification.</li>
+</ul>
+
+
+<p><code>growlnotify</code> supports some other options. You can use <code>growlnotify --help</code> to get the full list. The <code>-w</code> / <code>--wait</code> option is useful if you don&rsquo;t want Growl to close the notification automatically.</p>
+
+<h2>Using Libnotify (Linux)</h2>
+
+<p>On Linux, we can use <strong>libnotify</strong>. If you haven&rsquo;t installed it yet, install it first:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># debian/ubuntu</span>
+</span><span class='line'>sudo apt-get install libnotify-bin
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then you can give <code>notify-send</code> a try:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>notify-send -t 10000 -i baterry-full <span class="se">\</span>
+</span><span class='line'>            <span class="s2">&quot;Battery Charge Done&quot;</span> <span class="se">\</span>
+</span><span class='line'>            <span class="s2">&quot;\nYour battery charging process is done.&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In this example, the options are:</p>
+
+<ul>
+<li>-t specifies the expire time(in <em>milliseconds</em>).</li>
+<li>-i specifies the icon to show.</li>
+</ul>
+
+
+<p>It has some other options. You can check with <code>man notify-send</code>.</p>
+
+<blockquote><p>Note: In this example, I just use <strong>-i battery-full</strong> to specify the icon, not its full path. It can auto-expand the path(<em>/usr/share/icons/gnome/32x32/status/battery-full.png</em>). If you want to specify your own icon file, you should use the full path of your image file. On most Linux distributions, the icon files are stored in <strong>/usr/share/icons/</strong>.</p></blockquote>
+
+<h2>When to Use, When Not</h2>
+
+<p>I <strong>STRONGLY</strong> suggest you add the notification function into your shell library, esp. if you are working on some time-consuming scripts in a graphical desktop environment. I found it very useful when I was working on building Android project(typically 20-30 mins). And later, when I was creating a customized Debian live system, it helped me a lot as well.</p>
+
+<p>But keep in mind, DON&rsquo;T use it in a loop. Using it in a loop is just like shooting your own head. You will get a lot of output on your screen and it will make you angry.</p>
+
+<p>And it can&rsquo;t replace logging if your scripts are running in the background, esp. if they are run as cron jobs. In that case, use logging, <strong>output redirection</strong> and <strong>tee</strong>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[写在跨年]]></title>
+    <link href="http://dinny.github.io/blog/2012/12/31/2012-summary/"/>
+    <updated>2012-12-31T21:00:00+08:00</updated>
+    <id>http://dinny.github.io/blog/2012/12/31/2012-summary</id>
+    <content type="html"><![CDATA[<h2>2012年的生活</h2>
+
+<p>六个小时后，“2012”这四个数字就要逐渐从耳朵每天接收到的各种信号中淡去。是时间写个总结了，不然过去一年发生的一切都要淹没在平日的噪音中了。</p>
+
+<h3>迁徙</h3>
+
+<p>2011年，我决定在时机允许的情况下，开始到一些不同的地方走动走动。理想的状态是从事<strong>free lancer</strong>工作，到一个地方住上一段时间，<strong>融入到当地的生活中</strong>，而不是走马观花、在一个地方短暂停留就匆匆离去。最开始，我决定在海边住上整整一年。7月31号一早，我离开了北京，搭乘一早的航班到上海跟友才会合（隐约记得那天我的眼睛血红血红的）。8月，台风“梅花”一过，我就跟友才一起飞到了烟台威海。</p>
+
+<p>原定今年要在威海住到夏天过去再离开，但我在工作上的一些选择促使我提前结束海边的生活。3月末，一个人背着行囊去了西塘。清明节前在那里享受了安静的一周。紧接着动身来了杭州，了解了一下阿灿和凯他们在做的数字阅读产品，跟小陆和凯一起去江西看了趟油菜花。紧接着高中同学说要在老家开公司，想交给我来运作；于是我又赶回西安。之后又借道上海赶回威海，休息了半个月，就彻底搬来了杭州。</p>
+
+<p>杭州是个美丽的地方。这里，生活才更有味道，而不只是日复一日的工作；开车二三十分钟就能在附近找到很不错的去处待上一个上午或一个下午。不过堵车这个问题上，似乎跟北京上海比没有任何优势，甚至极有可能比北京还弱。</p>
+
+<h3>工作</h3>
+
+<p>3月，Intridea将SocialSpring项目分剥了出去。4月，SocialSpring又因业绩的原因叫停。当时正在跟Wunderlist团队谈工作机会。那段时间Intridea给出的工作时间非常少，但每天我还是得上线跟进PM给出的工作计划。很快，在老陈的推荐下，我选择离开，加入了一家新公司。</p>
+
+<p>虽然在新公司里出于工作的需要，要经常跟Windows程序猿打交道，但简单说来，彼此互不影响，相安无事。我还认识了几个对开源和移动互联网应用有点兴趣的人。而Wunderlist团队则在年底宣布，他们将放弃开发了半年多的Wunderkit。</p>
+
+<h3>译作</h3>
+
+<p>2012年在技术出版方面做了三件事：</p>
+
+<ol>
+<li>完成了2011年跟图灵说好的译作<a href="http://www.ituring.com.cn/book/980">《Linux命令行与shell脚本编程大全（第二版）》</a>的扫尾工作，并顺利出版；</li>
+<li>完成了2012年答应图灵的译作<a href="http://www.ituring.com.cn/book/1050">《实用负载均衡技术：网站性能优化攻略》</a>，13年5月左右出版；</li>
+<li>年底，图灵又交过来了另外一本书——<a href="http://www.ituring.com.cn/book/1053">《iOS 6编程实战》</a>。四人协作，新年开工，元月底交稿。</li>
+</ol>
+
+
+<h3>阅读</h3>
+
+<p>这一年里，几乎所有业余时间全部都看技术著作了。专业领域之外，看的书寥寥可数。</p>
+
+<h2>事关2013</h2>
+
+<p>2012年也曾做过其他一些计划，但囿于各种现实原因没实现。新年不想做太多的安排，但想稍稍理理。</p>
+
+<h3>工作</h3>
+
+<p>新年前后，已经在考察是否能在工作上找到一个较好的切入点，继续向移动互联网开进。2012年打算做的应用，最终因为迁徙、出版社合作的事一拖再拖。新年里希望能实现两个想法、上架两个移动应用。同时，Rails这边今年也希望有一些项目可以参与。</p>
+
+<h3>阅读</h3>
+
+<p>完成年初的翻译计划后，抽出时间看看技术无关的书籍。当然，感兴趣的技术还是要继续了解的。</p>
+
+<h3>Hacking</h3>
+
+<p>今年对Git的内部实现机制有了一个总体的了解。新年里想继续对下面的一些方向加深理解：</p>
+
+<ul>
+<li>Profile工具工作原理</li>
+<li>Git内部实现</li>
+<li>编译器原理和实现</li>
+<li>移动平台的自动化测试框架</li>
+</ul>
+
+
+<h3>写作</h3>
+
+<p>除了日常的翻译工作外，要开始写log了，可以是平时做Hacking时的一些理解和感悟，也可以是一些行业八卦。</p>
+
+<p>先简单写到这里。惟希望2013年年底来看时，能够带着一些对生活的新的理解来写出下一篇年终总结。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[修复通过homebrew安装工具时出现的SHA1 Mismatch问题]]></title>
+    <link href="http://dinny.github.io/blog/2012/08/15/fix-sha1-mismatch-of-homebrew/"/>
+    <updated>2012-08-15T21:00:00+08:00</updated>
+    <id>http://dinny.github.io/blog/2012/08/15/fix-sha1-mismatch-of-homebrew</id>
+    <content type="html"><![CDATA[<p>要给社区的某个工具做个Mac build，而这个工具依赖pyqt，想通过<a href="http://mxcl.github.com/homebrew/">homebrew</a>来安装。运行了一下<code>brew install pyqt</code>，结果输出“SHA1 mismatch”，报错：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>dinny-macbook-air:linkchecker dinny<span class="nv">$ </span>brew install <span class="nv">pyqt</span>
+</span><span class='line'><span class="o">==</span>&gt; Installing pyqt dependency: <span class="nv">qt</span>
+</span><span class='line'><span class="o">==</span>&gt; Downloading https://downloads.sf.net/project/machomebrew/Bottles/qt-4.8.0-bottle.tar.gz
+</span><span class='line'>File already downloaded in /Users/dinny/Library/Caches/Homebrew
+</span><span class='line'>Error: SHA1 mismatch
+</span><span class='line'>Expected: d03b56811d2cac933b6103bd4c8ac636dea3b877
+</span><span class='line'>Got: 2bfe00c5112b0d2a680cd01144701f8937846096
+</span><span class='line'>Archive: /Users/dinny/Library/Caches/Homebrew/qt-4.8.0.bottle.tar.gz
+</span><span class='line'><span class="o">(</span>To retry an incomplete download, remove the file above.<span class="o">)</span>
+</span><span class='line'>dinny-macbook-air:linkchecker dinny<span class="nv">$ </span>rm /Users/dinny/Library/Caches/Homebrew/qt-4.8.0.bottle.tar.gz
+</span><span class='line'>dinny-macbook-air:linkchecker dinny<span class="nv">$ </span>brew install <span class="nv">pyqt</span>
+</span><span class='line'><span class="o">==</span>&gt; Installing pyqt dependency: <span class="nv">qt</span>
+</span><span class='line'><span class="o">==</span>&gt; Downloading https://downloads.sf.net/project/machomebrew/Bottles/qt-4.8.0-bottle.tar.gz
+</span><span class='line'><span class="c">######################################################################## 100.0%</span>
+</span><span class='line'>Error: SHA1 mismatch
+</span><span class='line'>Expected: d03b56811d2cac933b6103bd4c8ac636dea3b877
+</span><span class='line'>Got: 2bfe00c5112b0d2a680cd01144701f8937846096
+</span><span class='line'>Archive: /Users/dinny/Library/Caches/Homebrew/qt-4.8.0.bottle.tar.gz
+</span><span class='line'><span class="o">(</span>To retry an incomplete download, remove the file above.<span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这个问题更新了brew就没问题了：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>dinny-macbook-air:linkchecker dinny<span class="nv">$ </span>brew update
+</span><span class='line'>dinny-macbook-air:linkchecker dinny<span class="nv">$ </span>brew install <span class="nv">pyqt</span>
+</span><span class='line'><span class="o">==</span>&gt; Installing pyqt dependency: <span class="nv">qt</span>
+</span><span class='line'><span class="o">==</span>&gt; Downloading https://downloads.sf.net/project/machomebrew/Bottles/qt-4.8.0-bottle.tar.gz
+</span><span class='line'>File already downloaded in /Users/dinny/Library/Caches/Homebrew
+</span><span class='line'><span class="o">==</span>&gt; Pouring qt-4.8.0.bottle.tar.gz
+</span><span class='line'><span class="o">==</span>&gt; Caveats
+</span><span class='line'>We agreed to the Qt opensource license <span class="k">for </span>you.
+</span><span class='line'>If this is unacceptable you should uninstall.
+</span><span class='line'><span class="o">==</span>&gt; Summary
+</span><span class='line'>/usr/local/Cellar/qt/4.8.0: 2722 files, <span class="nv">193M</span>
+</span><span class='line'><span class="o">==</span>&gt; Installing pyqt
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Bash命令行编辑及编码风格约定]]></title>
+    <link href="http://dinny.github.io/blog/2012/08/01/bash-commandline-editing-and-coding-style/"/>
+    <updated>2012-08-01T21:00:00+08:00</updated>
+    <id>http://dinny.github.io/blog/2012/08/01/bash-commandline-editing-and-coding-style</id>
+    <content type="html"><![CDATA[<h2>Bash命令行编辑与Readline</h2>
+
+<p>近年来看了不少介绍Linux命令行和shell编程方面的书，包括我翻译的这本<a href="http://book.douban.com/subject/11589828/">《Linux命令行与shell脚本编程大全（第2版）》</a>。尽管这些书都中规中矩地介绍了命令行常用的命令、shell的启动配置、shell的环境变量及shell编程的种种，但鲜有书肯花一定的篇幅来介绍跟shell交互时命令行编辑方面的内容，而命令行编辑在日常的命令行使用中恰恰非常重要。bash的命令行编辑功能由<a href="http://cnswww.cns.cwru.edu/php/chet/readline/rltop.html">Readline</a>提供。很多脚本语言的交互式shell的行编辑功能也都由该库提供。比如Python和gnuplot的交互式shell。但由于许可证（Readline采用GPLv3）带来的授权方面的限制，有些脚本语言的交互式shell采用其他一些行编辑库，如<strong><a href="http://www.thrysoee.dk/editline/">libedit</a></strong>、<strong><a href="http://www.astro.caltech.edu/~mcs/tecla/">Tecla</a></strong>等等。也有出于其他考虑使用自有行编辑库的shell，比如zsh使用的就是自己的<a href="http://zsh.sourceforge.net/Guide/zshguide04.html">zle</a>（所以zsh的自动补全机制跟bash的也有所不同）。</p>
+
+<blockquote><p>注意：这里说的命令行编辑（Commandline Editing）跟命令行编辑器（Commandline Text Editor）不同。命令行编辑是指在交互式命令行上对输入的命令进行编辑，而命令行编辑器则是指可在命令行界面中使用的用来编辑文本文件的编辑器，比如<strong>Vim</strong>或<strong>Emacs</strong>都是命令行编辑器。而sed和awk虽然也能处理文本，但它们是用来对文本流进行处理的，所以称为流编辑器（Stream Editor）。</p></blockquote>
+
+<p><strong>Readline</strong>主要提供的命令可分为以下几类：</p>
+
+<ul>
+<li>光标移动命令</li>
+<li>历史记录命令</li>
+<li>文本修改命令</li>
+<li>文本复制和删除命令</li>
+<li>自动补全命令</li>
+<li>键盘宏命令</li>
+<li>其他命令</li>
+</ul>
+
+
+<p>具体每个分类都包含哪些命令，可以参考<a href="http://www.gnu.org/software/bash/manual/bashref.html#Readline-Interaction">bash官方文档中相关的介绍</a>。这里就每个分类举几个例子。</p>
+
+<h3>光标移动命令</h3>
+
+<ul>
+<li>移到行首：<code>ctrl + a</code></li>
+<li>移到行尾：<code>ctrl + e</code></li>
+<li>向前移动一个字符：<code>ctrl + f</code></li>
+<li>向后移动一个字符：<code>ctrl + b</code></li>
+<li>清空屏幕：<code>Ctrl + l</code></li>
+</ul>
+
+
+<h3>历史记录命令</h3>
+
+<ul>
+<li>前一历史命令：<code>ctrl + p</code></li>
+<li>后一历史命令：<code>ctrl + n</code></li>
+<li>逆向搜索历史命令：<code>ctrl + r</code></li>
+<li>向前搜索历史命令：<code>ctrl + s</code></li>
+</ul>
+
+
+<h3>文本修改命令</h3>
+
+<ul>
+<li>删除当前光标下字符：<code>ctrl + d</code></li>
+<li>要输入类似<code>^Q</code>这样的按键组合，可以先按下<code>ctrl + v</code>，然后再按下<code>ctrl + q</code></li>
+<li>将光标前面的字符和光标下的字符互换顺序：<code>ctrl + t</code></li>
+</ul>
+
+
+<h3>文本复制和删除命令</h3>
+
+<ul>
+<li>删除光标至行尾的字符：<code>ctrl + k</code></li>
+<li>删除光标至行首的字符：<code>ctrl + u</code></li>
+<li>删除光标前的一个单词：<code>ctrl + w</code>（以空格作为单词分割符，并会将删掉的内容放到kill ring中）</li>
+<li>将kill ring顶部的内容复制到在当前位置：<code>ctrl + y</code></li>
+</ul>
+
+
+<h3>自动补全命令</h3>
+
+<ul>
+<li>自动补全：<code>TAB</code></li>
+<li>列出可能的补全内容是文件名：<code>ctrl + x /</code></li>
+<li>列出可能的补全内容是用户名：<code>ctrl + x ~</code></li>
+<li>列出可能的补全内容是变量：<code>ctrl + x $</code></li>
+<li>列出可能的补全内容是主机名：<code>ctrl + x @</code></li>
+<li>列出可能的补全内容是命令：<code>ctrl + x !</code></li>
+</ul>
+
+
+<h3>键盘宏命令</h3>
+
+<ul>
+<li>开始录制宏：<code>ctrl + x (</code></li>
+<li>结束录制宏：<code>ctrl + x )</code></li>
+<li>运行宏：<code>ctrl + x e</code></li>
+</ul>
+
+
+<h3>其他命令</h3>
+
+<ul>
+<li>重新读取配置文件：<code>ctrl + x</code> <code>ctrl + r</code></li>
+<li>撤销前面的操作：<code>ctrl + x</code> <code>ctrl + u</code></li>
+<li>设置标记：<code>ctrl + @</code></li>
+<li>交换标记和光标的位置：<code>ctrl + x</code> <code>ctrl + x</code></li>
+<li>显示当前shell的版本信息：<code>ctrl + x</code> <code>ctrl + v</code></li>
+<li>启动编辑器编辑命令，编辑完成后执行：<code>ctrl + x</code> <code>ctrl + e</code></li>
+</ul>
+
+
+<h2>Bash编码风格规范</h2>
+
+<p>正是Bash跟Linux系统的深度融合，所以一直以来人们都将Bash当成一门不严肃的语言。有时候甚至只是当作一个用来将命令记录下来的工具。如果你只是要用Linux做一些简单的配置和系统管理，那采取这种做法还姑且过得去。而在要构建复杂的工具时，人们通常会借助Python或Ruby一类编程语言来构建脚本，它们能够提供更高级的数据类型供程序使用。但如果你要采用bash来构建较大型的命令行工具时，你就必须遵循一定的编码风格规范。如果你们的项目还没有明确的编码风格规范，那可以参考<a href="http://lug.fh-swf.de/vim/vim-bash/StyleGuideShell.en.pdf">这份编码规范</a>。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Set Up Subversion Repos With Apache and SSL]]></title>
+    <link href="http://dinny.github.io/blog/2012/07/15/set-up-subversion-repos-with-apache-and-ssl/"/>
+    <updated>2012-07-15T21:00:00+08:00</updated>
+    <id>http://dinny.github.io/blog/2012/07/15/set-up-subversion-repos-with-apache-and-ssl</id>
+    <content type="html"><![CDATA[<p>Several years ago, <a href="http://subversion.tigris.org/">subversion(svn)</a> was one of the most popular version control systems in the open source world. It&rsquo;s based on the Central VCS model, thus not very convenient for offline usage as you need to be connected to the server before you make any commits.</p>
+
+<p>Actually I strongly recommend you direct to Git if you still have any chance to alternate. Git is based on the DVCS model and you can make any commits any time as you like, even if you are offline. You just need to push the commits back to the remote repository when you are reconnected to the network. Meanwhile, it has many more advanced features that can help you sleep early every day.</p>
+
+<p>I set up this subversion system for another team. I just leave this note for your reference if you need to set up another one.</p>
+
+<h2>Choose Your Model</h2>
+
+<p>Actually svn supports many repo access models, like svn protocol, svn over ssh, http access and https access. I prefer using the svn protocol since it&rsquo;s much easier to config the system. Unfortunately, we have a very strict IT policy and many ports are restricted, including svn protocol&rsquo;s 3690 port. Finally, I find out that we&rsquo;d better use https for access, since we can take the advantage of authz to control the access right of each user[group] to each directory. Another benefit is that 443 port is usually not disabled within corporate environments. That team is located behind the firewall of their company. Thus it&rsquo;s the safest solution. What https beats http is that it&rsquo;s more secure during the communication.</p>
+
+<h2>Hardware Requirements</h2>
+
+<p>It really depends on your projects and the user activity statistics. Normally a dual core CPU, 512 MB RAM and 20 GB disk space are enough for a 20 user team and 10 repos. But if you want better performance, you are not limited to this basic standard. For example, what I assigned to the server is a dual core CPU, 2GB RAM and 60 GB disk space.</p>
+
+<h2>Software Requirements</h2>
+
+<p>For software requirements, I suggest you install <em>Ubuntu server edition</em> or <em>CentOS 5.x</em> as the host environment. Normally the server edition of a distribution will best fit into the usage since the graphical user interface in the corresponding desktop edition won&rsquo;t bring much benefit, but take up a lot of overhead on disk space and the processing power. For example, a normal installation of Ubuntu 12.04 desktop edition (32 bit) will take around 5GB space, while a server edition will only take a little more than 1GB space.</p>
+
+<h2>Account Preparation</h2>
+
+<p>Ubuntu created <em>www-data</em> as a system user to work with Apache 2 to deal with incoming requests. If you want to make svn repo work with http/https, you need to grant <em>www-data</em> the proper access right. We will create a group <em>subversion</em> to access the svn repo files and you need to add <em>www-data</em> and yourself into this group:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>sudo addgroup subversion
+</span><span class='line'><span class="nv">$ </span>sudo usermod -G subversion -a www-data
+</span><span class='line'><span class="nv">$ </span>sudo usermod -G subversion -a dinny
+</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><p>Note: <strong>-a</strong> here is necessary. It will add <em>subversion</em> to user as a supplementary group. It will only work with <strong>-G</strong> option.</p></blockquote>
+
+<h2>Server Installation</h2>
+
+<p>I choose Ubuntu 12.04 server edition for use. Therefore CentOS won&rsquo;t be mentioned here. Except some difference on the config file location, setting up on CentOS is much the same. During installation, Ubuntu will prompt to ask which services you want to have. I chose LAMP stacks and SSH. For remote system configuration and management, you need SSH for a text-based user interface. For https access to svn repos, you need Apache to sit in front. Others are not necessary, and you can configure them as you like.</p>
+
+<h2>Package Installation</h2>
+
+<p>By default, Ubuntu doesn&rsquo;t have developer tools out of box. That means, you need to install them as you need. You need to install below packages before you make detailed configuration:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>sudo apt-get install subversion libapache2-svn ssl-cert
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Create the SVN Repo</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ PROJ_PATH</span><span class="o">=</span><span class="s2">&quot;/var/svn/repos/sample-project&quot;</span>
+</span><span class='line'><span class="nv">$ </span>sudo mkdir -p <span class="nv">$PROJ_PATH</span>
+</span><span class='line'><span class="nv">$ </span>sudo svnadmin create <span class="nv">$PROJ_PATH</span>
+</span><span class='line'><span class="nv">$ </span>sudo chown -R www-data:subversion <span class="nv">$PROJ_PATH</span>
+</span><span class='line'><span class="nv">$ </span>sudo chmod -R g+rws <span class="nv">$PROJ_PATH</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Configure Apache with Dav support</h2>
+
+<p>Edit dav_svn.conf with below info:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>cat /etc/apache2/mods-available/dav_svn.conf
+</span><span class='line'>&lt;Location /svn&gt;
+</span><span class='line'>    DAV svn
+</span><span class='line'>    SVNParentPath /var/svn/repos
+</span><span class='line'>    SVNListParentPath On
+</span><span class='line'>    AuthType Basic
+</span><span class='line'>    AuthName <span class="s2">&quot;Sample Subversion Project&quot;</span>
+</span><span class='line'>    AuthUserFile /etc/apache2/dav_svn.passwd
+</span><span class='line'>    SSLRequireSSL
+</span><span class='line'>    Require valid-user
+</span><span class='line'>    &lt;IfModule mod_authz_svn.c&gt;
+</span><span class='line'>        AuthzSVNAccessFile /etc/apache2/dav_svn.authz
+</span><span class='line'>    &lt;/IfModule&gt;
+</span><span class='line'>&lt;/Location&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Edit dav_svn.authz with below info:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>cat /etc/apache2/dav_svn.authz
+</span><span class='line'><span class="o">[</span>groups<span class="o">]</span>
+</span><span class='line'><span class="nv">admin</span> <span class="o">=</span> dinny
+</span><span class='line'><span class="nv">devteam</span> <span class="o">=</span> dinny
+</span><span class='line'><span class="o">[</span>/<span class="o">]</span>
+</span><span class='line'>@admin <span class="o">=</span> rw
+</span><span class='line'>@devteam <span class="o">=</span> rw
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Add a user account(note that if it&rsquo;s not the first time you create the user, you should omit <strong>-c</strong>):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>sudo htpasswd -c -m /etc/apache2/dav_svn.passwd dinny
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Enable the modules:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>sudo a2enmod dav_svn authz_svn
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Configure Apaches with SSL support</h2>
+
+<p>Generate the SSL certificate with make-ssl-cert tool from package ssl-cert:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>sudo mkdir -p /etc/apache2/ssl
+</span><span class='line'><span class="nv">$ </span>sudo /usr/sbin/make-ssl-cert /usr/share/ssl-cert/ssleay.cnf /etc/apache2/ssl/apache.pem
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Create  the virtual host as below:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>sudo cp /etc/apache2/sites-available/default-ssl /etc/apache2/sites-available/svn-ssl
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Make below changes to svn-ssl:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>sudoedit /etc/apache2/sites-available/svn-ssl
+</span><span class='line'>- SSLCertificateFile    /etc/ssl/certs/ssl-cert-snakeoil.pem
+</span><span class='line'>- SSLCertificateKeyFile /etc/ssl/private/ssl-cert-snakeoil.key
+</span><span class='line'>+ <span class="c">#SSLCertificateFile    /etc/ssl/certs/ssl-cert-snakeoil.pem</span>
+</span><span class='line'>+ <span class="c">#SSLCertificateKeyFile /etc/ssl/private/ssl-cert-snakeoil.key</span>
+</span><span class='line'>+ SSLCertificateFile    /etc/apache2/ssl/apache.pem
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Enable the ssl module and the svn-ssl site, and restart apache:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>sudo a2enmod ssl
+</span><span class='line'><span class="nv">$ </span>sudo a2dissite default default-ssl
+</span><span class='line'><span class="nv">$ </span>sudo a2ensite svn-ssl
+</span><span class='line'><span class="nv">$ </span>sudo service apache2 restart
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That&rsquo;s all the work. Now you can try to checkout the repo for a test!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[如何修复/home分区和swap分区被误删的Ubuntu 12.04]]></title>
+    <link href="http://dinny.github.io/blog/2012/07/01/how-to-fix-a-home-swap-partition-swipped-ubuntu-12-dot-04/"/>
+    <updated>2012-07-01T21:00:00+08:00</updated>
+    <id>http://dinny.github.io/blog/2012/07/01/how-to-fix-a-home-swap-partition-swipped-ubuntu-12-dot-04</id>
+    <content type="html"><![CDATA[<p>同事在Ubuntu上调试程序时，眼花缭乱中将挂载到<strong>/home</strong>的分区和<strong>SWAP分区</strong>给删除了，导致她的系统无法登录。由于系统上已经安装了很多系统更新和开发工具，新装一个系统要重复安装很多软件包。这些软件都安装在根目录所在的分区，所以依然在系统中，如果可以修复就避免了安装系统更新和开发工具要耗费的大量时间。基本上有两件事要解决：</p>
+
+<ol>
+<li>重新做一个挂载<strong>/home</strong>的分区出来（目前挂载根目录的分区只有20GB，不够用）；</li>
+<li>恢复用户主目录的基本目录结构，包括一些默认的用户配置。</li>
+</ol>
+
+
+<p>首先重启系统，用GParted Live CD（或USB Stick）启动，用GPartd分区工具重新建两个分区出来：一个格式化为Ext4文件系统；一个不要格式化，标记为swap分区。记住这两个分区对应的设备节点。</p>
+
+<p>然后重新启动。由于Ubuntu 12.04并不支持在启动时修改GRUB的内核启动参数，无法直接进入单用户模式操作；只能进入Ubuntu的恢复模式，选择“Drop to root shell”。进入root shell后，注意到整个文件系统都只读。这时要对配置文件做一些修改的话，必须将文件系统重新挂在为可读写的：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>mount -n -o remount,rw /
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>之后修改<strong>/etc/fstab</strong>文件。现在这个文件都使用uuid来标识分区，但依然支持过去的用法——直接使用设备节点。删除掉以前的/home和swap对应的uuid条目，替换成新的格式化后分区的设备节点，比如/dev/sda5，/dev/sda6。这样就解决了/home的挂载问题。</p>
+
+<p>下面再解决另外一个问题：用户的主目录为空。由于过去的主目录内容已经全部丢失，而且找回的几率很小，那就可以先删除用户再添加用户重新根据/etc/skel的内容生成用户主目录中的内容。简单的说如下：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>userdel -r <span class="nv">$FAKE_USER</span>
+</span><span class='line'>useradd -n -m -k -u uid  <span class="nv">$FAKE_USER</span>
+</span><span class='line'>passwd <span class="nv">$FAKE_USER</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果你担心以前用户写入的文件无法读取，你可以在重新添加用户时指定用户UID。这样子就可以拥有以前用户UID所拥有的权限了。</p>
+
+<p>如果你还遇到新生成的$FAKE_USER登录后无法通过sudo提权的问题，可以重新回到恢复模式下，依然将文件系统remount为可读写的，直接修改<strong>/etc/sudoers</strong>文件：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>root  <span class="nv">ALL</span><span class="o">=(</span>ALL:ALL<span class="o">)</span> ALL
+</span><span class='line'><span class="nv">$FAKE_USER</span> <span class="nv">ALL</span><span class="o">=(</span>ALL:ALL<span class="o">)</span> ALL
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>或将$FAKE_USER加入到admin组中：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>usermod -a -G admin <span class="nv">$FAKE_USER</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>重新启动，系统重新恢复正常。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Setting Up Octpress for Github Pages on Linux]]></title>
+    <link href="http://dinny.github.io/blog/2012/02/15/setting-up-octpress-on-github/"/>
+    <updated>2012-02-15T21:00:00+08:00</updated>
+    <id>http://dinny.github.io/blog/2012/02/15/setting-up-octpress-on-github</id>
+    <content type="html"><![CDATA[<p>I have used <a href="http://wordpress.org/">WordPress</a> for more than 3 years. Yet recently I decided to switch to <a href="http://octopress.org/">Octopress</a> for personal notes. WordPress is too heavy to use, and it needs a lot of effort on configuring, which makes me feel bad. Besides that, I need to rent a space to set things up. Octopress relies heavily on <a href="http://www.ruby-lang.org/en/">Ruby</a>, which is used as my main develop language these days. And Github Pages supports Octopress. Therefore you can just use Octopress as your personal blog, generate static pages and put them onto Github. This article talks about how to set things up for a Github blog.</p>
+
+<h2>Ruby Environment Setup</h2>
+
+<p>Ruby is out of box for most Linux distributions. You can install <a href="https://rvm.io/">rvm</a> to make managing various Ruby versions and environments easier.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>curl -L https://get.rvm.io | bash -s stable --ruby
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then you can list the installed Ruby versions by inputting:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rvm list
+</span><span class='line'>
+</span><span class='line'>rvm rubies
+</span><span class='line'>
+</span><span class='line'>   ruby-1.9.2-p320 <span class="o">[</span> x86_64 <span class="o">]</span>
+</span><span class='line'><span class="o">=</span>* ruby-1.9.3-p194 <span class="o">[</span> x86_64 <span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># =&gt; - current</span>
+</span><span class='line'><span class="c"># =* - current &amp;&amp; default</span>
+</span><span class='line'><span class="c">#  * - default</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then install bundler to manage the gemsets you need for working on different machines:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>gem install bundler
+</span><span class='line'>Fetching: bundler-1.2.1.gem <span class="o">(</span>100%<span class="o">)</span>
+</span><span class='line'>Successfully installed bundler-1.2.1
+</span><span class='line'>1 gem installed
+</span><span class='line'>Installing ri documentation <span class="k">for </span>bundler-1.2.1...
+</span><span class='line'>Installing RDoc documentation <span class="k">for </span>bundler-1.2.1...
+</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><p>Note: If you got any error here, please install <strong>libssl-dev</strong> package(on Debian). It&rsquo;s neccessary when building the openssl gem. You can install it by typing <strong>sudo apt-get install libssl-dev</strong> in the console.</p></blockquote>
+
+<h2>Basic Configuration</h2>
+
+<p>If you want to hold your blog with URL like this: <a href="http://your-username.github.com,">http://your-username.github.com,</a> you need to create a project named &ldquo;your-username.github.com&rdquo; on Github.</p>
+
+<p>Then you need to get a copy of source of Octopress and do some basic setup:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git clone https://github.com/imathis/octopress.git octopress
+</span><span class='line'><span class="nv">$ </span><span class="nb">cd </span>octopress
+</span><span class='line'><span class="nv">$ </span>bundle update
+</span><span class='line'><span class="nv">$ </span>rake install
+</span><span class='line'><span class="nv">$ </span>rake setup_github_pages
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It will do below tasks:</p>
+
+<ul>
+<li>Ask you for your Github Pages repository url.</li>
+<li>Rename the remote pointing to imathis/octopress from &lsquo;origin&rsquo; to &lsquo;octopress&rsquo;</li>
+<li>Add your Github Pages repository as the default origin remote.</li>
+<li>Switch the active branch from master to source.</li>
+<li>Configure your blog&rsquo;s url according to your repository.</li>
+<li>Setup a master branch in the _deploy directory for deployment.</li>
+</ul>
+
+
+<p>When it prompts for the git repository URL, you need to provide a full URL to that git repo, like this: <strong>git@github.com:username/username.github.com.git</strong> (Replace <code>username</code> with actual username).</p>
+
+<h2>Generate Posts and Deploy</h2>
+
+<p>After that, you can generate a new post like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rake new_post<span class="se">\[</span><span class="s2">&quot;Setting up Octpress on Github&quot;</span><span class="se">\]</span>
+</span><span class='line'>mkdir -p <span class="nb">source</span>/_posts
+</span><span class='line'>Creating new post: <span class="nb">source</span>/_posts/2012-02-25-setting-up-octpress-on-github.markdown
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then you can edit that markdown file with your favorite markdown editor(I prefer retext on Linux).</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>retext <span class="nb">source</span>/_posts/2012-02-25-setting-up-octpress-on-github.markdown
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After you have added your contents, simply run below commands:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rake generate
+</span><span class='line'><span class="nv">$ </span>rake deploy
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It will generate the static blog pages, copy the generated files into _deploy/, add them to git, commit and push them up to the master branch.</p>
+
+<p><strong>Don&rsquo;t forget to submit the markdown file to source branch.</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git add .
+</span><span class='line'><span class="nv">$ </span>git commit -m <span class="s1">&#39;Publish my first blog post.&#39;</span>
+</span><span class='line'><span class="nv">$ </span>git push origin <span class="nb">source</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After several minutes, you can open the URL *<a href="http://your-username.github.com*">http://your-username.github.com*</a> with your favorite browser to check if it has the content as expected.</p>
+
+<h2>Others</h2>
+
+<p>If you want to update Octopress with latest changes from the original repo, you can do it like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">cd </span>octopress
+</span><span class='line'><span class="nv">$ </span>git remote add upstream https://github.com/imathis/octopress.git
+</span><span class='line'><span class="nv">$ </span>git pull upstream
+</span><span class='line'><span class="nv">$ </span>git push
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>An alternative way is before you do any modification after the git clone, you can run below commands:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">cd </span>octopress
+</span><span class='line'><span class="nv">$ </span>git remote rename origin upstream
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then you can get the latest changes by typing:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">cd </span>octopress
+</span><span class='line'><span class="nv">$ </span>git pull upstream
+</span><span class='line'><span class="nv">$ </span>git push
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>References</h2>
+
+<ul>
+<li><a href="http://www.zhubert.com/blog/2012/04/26/getting-started-with-octopress/">zhubert&rsquo;s Getting Started With Octopress</a> on his blog.</li>
+<li><a href="http://octopress.org/docs/deploying/github/">Octopress&#8217; Github Deploy Guide</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,447 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Set Up Subversion Repos With Apache and SSL - DIVING FOR FUN</title>
+  <meta name="author" content="Dinny Wu">
+
+  
+  <meta name="description" content="Several years ago, subversion(svn) was one of the most popular version control systems in the open source world. It&rsquo;s based on the Central VCS &hellip;">
+  
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  
+  <link rel="canonical" href="http://dinny.github.io/blog/2012/07/15/set-up-subversion-repos-with-apache-and-ssl">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="DIVING FOR FUN" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <div id="sidebar_control"></div>
+  <div id="sidebar">
+    <div class="logo">
+      .krnl
+    </div>
+    <div class="content hide">
+      <section role="navigation">
+        <header role="banner"><hgroup>
+  <h1><a href="/">DIVING FOR FUN</a></h1>
+  
+    <h2>Tech Notes from Dinny Wu</h2>
+  
+</hgroup>
+
+</header>
+        
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:dinny.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/publication">Publication</a></li>
+  <li><a href="/about-dinny">About Me</a></li>
+  <li><a href="/atom.xml">Atom</a></li>
+</ul>
+
+
+      </section>
+      
+        <section>
+  <h1>About Dinny</h1>
+  <div id="about_dinny">
+     <p>A code monkey. Working for <strong>Backtick Code</strong>.</p>
+  </div>
+  <div></div>
+</section>
+<section>
+  <h2>recent</h2>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/07/26/how-to-make-remote-work-powerful/">也谈团队远程工作 - 如何让远程工作更有效</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/04/20/some-tools-after-firewall/">如何给一些Mac命令行工具设置代理服务器</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/04/13/on-hacker/">从一个问题的答案想到的黑客</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/04/06/notify-your-commandline-growl-libnotify/">Notify Your Commandline - Growl and Libnotify</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/12/31/2012-summary/">写在跨年</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h2>github</h2>
+  
+  <a href="https://github.com/dinny">@dinny</a>
+  
+  <ul id="gh_repos">
+  </ul>
+</section>
+
+
+      
+    </div>
+  </div>
+  <div id="main">
+    <div class="content">
+      <article class="hentry" role="article">
+  
+  
+    <header>
+      <div class="back"><a href="/" onclick="history.go(-1);return false;">← Back</a></div>
+      <h1 class="entry-title">Set Up Subversion Repos With Apache and SSL</h1>
+    </header>
+  
+  <div class="entry-content"><p>Several years ago, <a href="http://subversion.tigris.org/">subversion(svn)</a> was one of the most popular version control systems in the open source world. It&rsquo;s based on the Central VCS model, thus not very convenient for offline usage as you need to be connected to the server before you make any commits.</p>
+
+<p>Actually I strongly recommend you direct to Git if you still have any chance to alternate. Git is based on the DVCS model and you can make any commits any time as you like, even if you are offline. You just need to push the commits back to the remote repository when you are reconnected to the network. Meanwhile, it has many more advanced features that can help you sleep early every day.</p>
+
+<p>I set up this subversion system for another team. I just leave this note for your reference if you need to set up another one.</p>
+
+<h2>Choose Your Model</h2>
+
+<p>Actually svn supports many repo access models, like svn protocol, svn over ssh, http access and https access. I prefer using the svn protocol since it&rsquo;s much easier to config the system. Unfortunately, we have a very strict IT policy and many ports are restricted, including svn protocol&rsquo;s 3690 port. Finally, I find out that we&rsquo;d better use https for access, since we can take the advantage of authz to control the access right of each user[group] to each directory. Another benefit is that 443 port is usually not disabled within corporate environments. That team is located behind the firewall of their company. Thus it&rsquo;s the safest solution. What https beats http is that it&rsquo;s more secure during the communication.</p>
+
+<h2>Hardware Requirements</h2>
+
+<p>It really depends on your projects and the user activity statistics. Normally a dual core CPU, 512 MB RAM and 20 GB disk space are enough for a 20 user team and 10 repos. But if you want better performance, you are not limited to this basic standard. For example, what I assigned to the server is a dual core CPU, 2GB RAM and 60 GB disk space.</p>
+
+<h2>Software Requirements</h2>
+
+<p>For software requirements, I suggest you install <em>Ubuntu server edition</em> or <em>CentOS 5.x</em> as the host environment. Normally the server edition of a distribution will best fit into the usage since the graphical user interface in the corresponding desktop edition won&rsquo;t bring much benefit, but take up a lot of overhead on disk space and the processing power. For example, a normal installation of Ubuntu 12.04 desktop edition (32 bit) will take around 5GB space, while a server edition will only take a little more than 1GB space.</p>
+
+<h2>Account Preparation</h2>
+
+<p>Ubuntu created <em>www-data</em> as a system user to work with Apache 2 to deal with incoming requests. If you want to make svn repo work with http/https, you need to grant <em>www-data</em> the proper access right. We will create a group <em>subversion</em> to access the svn repo files and you need to add <em>www-data</em> and yourself into this group:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>sudo addgroup subversion
+</span><span class='line'><span class="nv">$ </span>sudo usermod -G subversion -a www-data
+</span><span class='line'><span class="nv">$ </span>sudo usermod -G subversion -a dinny
+</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><p>Note: <strong>-a</strong> here is necessary. It will add <em>subversion</em> to user as a supplementary group. It will only work with <strong>-G</strong> option.</p></blockquote>
+
+<h2>Server Installation</h2>
+
+<p>I choose Ubuntu 12.04 server edition for use. Therefore CentOS won&rsquo;t be mentioned here. Except some difference on the config file location, setting up on CentOS is much the same. During installation, Ubuntu will prompt to ask which services you want to have. I chose LAMP stacks and SSH. For remote system configuration and management, you need SSH for a text-based user interface. For https access to svn repos, you need Apache to sit in front. Others are not necessary, and you can configure them as you like.</p>
+
+<h2>Package Installation</h2>
+
+<p>By default, Ubuntu doesn&rsquo;t have developer tools out of box. That means, you need to install them as you need. You need to install below packages before you make detailed configuration:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>sudo apt-get install subversion libapache2-svn ssl-cert
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Create the SVN Repo</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ PROJ_PATH</span><span class="o">=</span><span class="s2">&quot;/var/svn/repos/sample-project&quot;</span>
+</span><span class='line'><span class="nv">$ </span>sudo mkdir -p <span class="nv">$PROJ_PATH</span>
+</span><span class='line'><span class="nv">$ </span>sudo svnadmin create <span class="nv">$PROJ_PATH</span>
+</span><span class='line'><span class="nv">$ </span>sudo chown -R www-data:subversion <span class="nv">$PROJ_PATH</span>
+</span><span class='line'><span class="nv">$ </span>sudo chmod -R g+rws <span class="nv">$PROJ_PATH</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Configure Apache with Dav support</h2>
+
+<p>Edit dav_svn.conf with below info:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>cat /etc/apache2/mods-available/dav_svn.conf
+</span><span class='line'>&lt;Location /svn&gt;
+</span><span class='line'>    DAV svn
+</span><span class='line'>    SVNParentPath /var/svn/repos
+</span><span class='line'>    SVNListParentPath On
+</span><span class='line'>    AuthType Basic
+</span><span class='line'>    AuthName <span class="s2">&quot;Sample Subversion Project&quot;</span>
+</span><span class='line'>    AuthUserFile /etc/apache2/dav_svn.passwd
+</span><span class='line'>    SSLRequireSSL
+</span><span class='line'>    Require valid-user
+</span><span class='line'>    &lt;IfModule mod_authz_svn.c&gt;
+</span><span class='line'>        AuthzSVNAccessFile /etc/apache2/dav_svn.authz
+</span><span class='line'>    &lt;/IfModule&gt;
+</span><span class='line'>&lt;/Location&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Edit dav_svn.authz with below info:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>cat /etc/apache2/dav_svn.authz
+</span><span class='line'><span class="o">[</span>groups<span class="o">]</span>
+</span><span class='line'><span class="nv">admin</span> <span class="o">=</span> dinny
+</span><span class='line'><span class="nv">devteam</span> <span class="o">=</span> dinny
+</span><span class='line'><span class="o">[</span>/<span class="o">]</span>
+</span><span class='line'>@admin <span class="o">=</span> rw
+</span><span class='line'>@devteam <span class="o">=</span> rw
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Add a user account(note that if it&rsquo;s not the first time you create the user, you should omit <strong>-c</strong>):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>sudo htpasswd -c -m /etc/apache2/dav_svn.passwd dinny
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Enable the modules:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>sudo a2enmod dav_svn authz_svn
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Configure Apaches with SSL support</h2>
+
+<p>Generate the SSL certificate with make-ssl-cert tool from package ssl-cert:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>sudo mkdir -p /etc/apache2/ssl
+</span><span class='line'><span class="nv">$ </span>sudo /usr/sbin/make-ssl-cert /usr/share/ssl-cert/ssleay.cnf /etc/apache2/ssl/apache.pem
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Create  the virtual host as below:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>sudo cp /etc/apache2/sites-available/default-ssl /etc/apache2/sites-available/svn-ssl
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Make below changes to svn-ssl:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>sudoedit /etc/apache2/sites-available/svn-ssl
+</span><span class='line'>- SSLCertificateFile    /etc/ssl/certs/ssl-cert-snakeoil.pem
+</span><span class='line'>- SSLCertificateKeyFile /etc/ssl/private/ssl-cert-snakeoil.key
+</span><span class='line'>+ <span class="c">#SSLCertificateFile    /etc/ssl/certs/ssl-cert-snakeoil.pem</span>
+</span><span class='line'>+ <span class="c">#SSLCertificateKeyFile /etc/ssl/private/ssl-cert-snakeoil.key</span>
+</span><span class='line'>+ SSLCertificateFile    /etc/apache2/ssl/apache.pem
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Enable the ssl module and the svn-ssl site, and restart apache:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>sudo a2enmod ssl
+</span><span class='line'><span class="nv">$ </span>sudo a2dissite default default-ssl
+</span><span class='line'><span class="nv">$ </span>sudo a2ensite svn-ssl
+</span><span class='line'><span class="nv">$ </span>sudo service apache2 restart
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That&rsquo;s all the work. Now you can try to checkout the repo for a test!</p>
+</div>
+  <footer>
+    <div class="articlemeta">
+      <span class="hide">
+        
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/scm/'>scm</a>
+  
+</span>
+
+ @
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-15T21:00:00+08:00" pubdate data-updated="true">Jul 15<span>th</span>, 2012</time>
+      </span>
+      <span class="plus">
+        
+          <a href="#">+</a>
+        
+      </span>
+    </div>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <div class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/07/01/how-to-fix-a-home-swap-partition-swipped-ubuntu-12-dot-04/" title="Previous Post: 如何修复/home分区和swap分区被误删的Ubuntu 12.04">&laquo; 如何修复/home分区和swap分区被误删的Ubuntu 12.04</a>
+      
+    </div>
+  </footer>
+
+
+</article>
+
+  <section>
+    <div class="hide" id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+
+    </div>
+    <footer role="contentinfo"><div class="content">
+  <p>
+    Copyright &copy; 2014 Dinny Wu
+  </p>
+</div>
+
+</footer>
+    
+
+<script type="text/javascript">
+  disqus_shortname = 'divingforfun';
+  
+    disqus_identifier = 'http://dinny.github.io/blog/2012/07/15/set-up-subversion-repos-with-apache-and-ssl/';
+    disqus_url = 'http://dinny.github.io/blog/2012/07/15/set-up-subversion-repos-with-apache-and-ssl/';
+    function loadDisqus() {
+      
+      // var disqus_developer = 1;
+      var disqus_script = 'embed.js';
+      (function () {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }());
+    }
+  
+  (function () {
+    var disqus_script = 'count.js';
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+  <script src="/javascripts/modernizr-2.0.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+<script src="/javascripts/libs/respond.js" type="text/javascript"></script>
+<script src="/javascripts/octopress.js" type="text/javascript"></script>
+
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+  <script type="text/javascript">
+  $(document).ready(function(){
+    if (!window.jXHR){
+      var jxhr = document.createElement('script');
+      jxhr.type = 'text/javascript';
+      jxhr.src = '/javascripts/libs/jXHR.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(jxhr, s);
+    }
+
+    github.showRepos({
+      user: 'dinny',
+      count: 5,
+      skip_forks: true,
+      target: '#gh_repos'
+    });
+  });
+  </script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+  var userAgent = navigator.userAgent.toLowerCase();
+  var isiPhone = (userAgent.indexOf('iphone') != -1 || userAgent.indexOf('ipod') != -1) ? true : false;
+  var isAndroid = (userAgent.indexOf('android') != -1) ? true : false;
+  clickEvent = (isiPhone || isAndroid) ? 'touchstart' : 'click';
+  $('#sidebar').on(clickEvent, function() {
+    $(this).toggleClass('open');
+  });
+  $('.articlemeta').on(clickEvent, function() {
+    toggleDisqus();
+    $(this).toggleClass('open');
+  });
+});
+</script>
+
+</body>
+</html>
