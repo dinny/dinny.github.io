@@ -1,0 +1,26 @@
+---
+layout: post
+title: "从一个问题的答案想到的黑客"
+date: 2013-04-13 21:00
+comments: true
+categories: thoughts
+---
+
+最近，跟朋友几次聊起代码风格，我隔三岔五地提到[K-H Greg](en.wikipedia.org/wiki/Greg_Kroah-Hartman)。我先大概介绍一下。自2000年以来，Greg一直都是Linux Kernel最活跃的开发人员之一，现在是USB、driver core、debugfs、kref、kobject、sysfs等Kernel子模块的维护者。
+
+以前看过他写的两个小工具：
+
+- 给Linux Kernel项目写的一个提交记录分析工具 - [git-dm](http://repo.or.cz/w/git-dm.git)
+- 将命令行执行的命令通过管道重定向到twitter上的工具 - [bti](https://github.com/gregkh/bti)
+
+前者用的是Python，后者用的是shell + C。Python的代码风格素来严谨，而shell的代码风格素来粗犷。有心人可以到这两个项目的主页下载代码、看看具体实现中的函数接口和代码风格。在我读过的代码中，这两个项目的代码风格绝对名列前茅。他在代码中很少用一些鲜见的tips或tricks，每条语句都很尽可能清晰易懂、符合规范。
+
+举个最简单的例子，在shell脚本中，他都会记得在函数中给只在函数中用到的变量加上`local`关键字。这样就防止了在其他函数中或是在调用函数中误用函数中的变量。非常好的处理方式。尤其是对于shell这种很容易出错又很难调试的脚本代码，规范和可读性远比一些技巧更重要。在git-dm中，他设计的基础函数清晰易懂，读起来效率很高，很快就能理清哪段代码做的是什么事情，稍微看一下文档就好了。（除了这部分代码，以前还看过他给kernel提交的补丁。）
+
+高级语言生来就是为了满足人输出代码、理解代码的需要。**可读性要远远高于那些tips或tricks带来的一点点小便宜**。
+
+现在之所以会想到Greg，是因为几个月前的一天，小美问我，我最欣赏的人是谁。这是个太过开放的问题。事实上，各个领域都会有那么一两个人叫你觉得很靠谱。我说，如果将范围限制到我现在从事的领域，那么有两个人，一个是K-H Greg，一个是[Paul Graham](http://www.paulgraham.com)。
+
+Greg是最专注的写代码的程序猿之一，可以每天工作超过14个小时，很有贡献精神，热心。最开始接触Linux驱动开发也是基于他写的[LDD一书](http://book.douban.com/subject/1493443/)和[DDK Live系统](http://ftp.be.debian.org/pub/linux/kernel/people/gregkh/ddk/)。而Paul则通过他独特的思路，促进业界形成了一种新的生态——技术创业。Jobs带来的移动产品革命造福了大众，而Paul发起的产业革命则给行业带来了投资、带来了圈子，使得好的idea得以孵化。Paul在1998年将自己创建的Viaweb卖给Yahoo!拿到第一桶金之后，就着眼投资创业团队。他所创建的YC，今天几乎影响到了所有准备在IT领域创业的年轻人。他写的文章也都有着他自己对行业的见解和理解，很受欢迎。博客中的一些文章经过整理，促成了[《黑客与画家》](http://book.douban.com/subject/6021440/)一书。
+
+他们应该算是这个时代我所幸知道的最优秀的黑客中的两个，虽然各自有各自的风格。当然，我不是说，Linus就不是个好厨师。我依然喜欢用git，依然喜欢用Linux。
