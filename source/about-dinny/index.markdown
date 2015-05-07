@@ -1,12 +1,12 @@
 ---
 layout: page
 title: "About Dinny"
-date: 2013-08-02 21:00
+date: 2014-05-18 21:00
 comments: true
 sharing: true
 footer: true
 ---
-A code monkey. Make fun of Linux/Mac OS X and Web.
+A Code Monkey. Make fun of Linux/Mac OS X and Web.
 
 - ![linkedin](/assets/linkedin_favicon.png)[LinkedIn](http://www.linkedin.com/in/dinnywu)
 - ![github](/assets/github_favicon.png)[Github](https://github.com/dinny)
