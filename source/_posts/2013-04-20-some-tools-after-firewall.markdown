@@ -54,7 +54,7 @@ zsh completion has been installed to:
 - subversion：在防火墙后面访问不了外面的HTTP repo。需要修改*~/.subversion/servers*（如果文件不存在需要自行添加）：
 ``` bash
 [groups]
-group1 = *.9pm.me
+group1 = *.backtick.info
 
 [group1]
 http-proxy-host = 192.168.80.100
