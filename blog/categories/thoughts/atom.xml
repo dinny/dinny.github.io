@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Thoughts | DIVING FOR FUN]]></title>
   <link href="http://dinny.github.io/blog/categories/thoughts/atom.xml" rel="self"/>
   <link href="http://dinny.github.io/"/>
-  <updated>2015-05-13T14:18:31+08:00</updated>
+  <updated>2015-05-13T14:21:44+08:00</updated>
   <id>http://dinny.github.io/</id>
   <author>
     <name><![CDATA[Dinny Wu]]></name>
@@ -76,7 +76,7 @@ The OS X keychain credential helper has been installed to:
 <li>subversion：在防火墙后面访问不了外面的HTTP repo。需要修改<em>~/.subversion/servers</em>（如果文件不存在需要自行添加）：
 ``` bash
 [groups]
-group1 = *.9pm.me</li>
+group1 = *.backtick.info</li>
 </ul>
 
 
